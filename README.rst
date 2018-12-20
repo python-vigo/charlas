@@ -6,19 +6,19 @@ El formato de los datos y organización del repositorio está todavía por defin
 
 Está creada una primera idea para tener algo y poder trabajar sobre ello, pero lo suyo sería que abrieseis o contestaseis a issues para dar vuestras opiniones sobre cómo debería organizarse, qué información incluir, etc.
 
-La estructura inicial de carpetas (que ya digo que es más que nada por tener algo sobre lo que trabajar), es la siguiente:
+La estructura inicial de carpetas (que ya digo que es más que nada por tener algo sobre lo que trabajar), es la siguiente::
 
 
-.
-├── pyday_galicia
-│   ├── 2016
-│   └── 2017
-├── python_vigo
-│   └── 20181220
-│       ├── charlas
-│       │   └── DavidLorenzo__MicroPython
-│       └── lightnings
-│           ├── Daniel__Loguru
-│           ├── DavidLorenzo__PyBuses
-│           └── PabloVazquez__Searx
-└── README.rst
+  .
+  ├── pyday_galicia
+  │   ├── 2016
+  │   └── 2017
+  ├── python_vigo
+  │   └── 20181220
+  │       ├── charlas
+  │       │   └── DavidLorenzo__MicroPython
+  │       └── lightnings
+  │           ├── Daniel__Loguru
+  │           ├── DavidLorenzo__PyBuses
+  │           └── PabloVazquez__Searx
+  └── README.rst
