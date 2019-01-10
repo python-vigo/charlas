@@ -18,7 +18,7 @@ La estructura inicial de carpetas (que ya digo que es más que nada por tener al
   │       ├── charlas
   │       │   └── DavidLorenzo__MicroPython
   │       └── lightnings
-  │           ├── Daniel__Loguru
+  │           ├── DanielSanchez__Loguru
   │           ├── DavidLorenzo__PyBuses
   │           └── PabloVazquez__Searx
   └── README.rst
