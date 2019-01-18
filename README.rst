@@ -6,22 +6,16 @@ El formato de los datos y organización del repositorio está todavía por defin
 
 Está creada una primera idea para tener algo y poder trabajar sobre ello, pero lo suyo sería que abrieseis o contestaseis a issues para dar vuestras opiniones sobre cómo debería organizarse, qué información incluir, etc.
 
-La estructura inicial de carpetas (que ya digo que es más que nada por tener algo sobre lo que trabajar), es la siguiente::
-
+Se simplificó la estructura de carpetas inicialmente propuesta, ahora mismo queda tal que así::
 
   .
-  ├── pyday_galicia
-  │   ├── 2016
-  │   └── 2017
-  ├── python_vigo
-  │   └── 20181220
-  │       ├── charlas
-  │       │   └── DavidLorenzo__MicroPython
-  │       └── lightnings
-  │           ├── DanielSanchez__Loguru
-  │           ├── DavidLorenzo__PyBuses
-  │           └── PabloVazquez__Searx
+  ├── 2018-12-20 - MiroPython [charla] - David Lorenzo
+  ├── 2018-12-20 - PyBuses [relámpago] - David Lorenzo
+  ...
   └── README.rst
+
+
+Mucho más simple y fácil de colaborar, sin necesidad de preocuparse de índices, etc.
 
 
 En la siguiente tabla muestran las charlas principales de las reuniones regulares.
