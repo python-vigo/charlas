@@ -1,5 +1,9 @@
-.. image:: https://travis-ci.com/python-vigo/charlas.svg?branch=master
+.. |travis_badge| image:: https://travis-ci.com/python-vigo/charlas.svg?branch=master
     :target: https://travis-ci.com/python-vigo/charlas
+
+.. |repo_size_badge| image:: https://img.shields.io/github/repo-size/python-vigo/charlas.svg
+
+|travis_badge| |repo_size_badge|
 
 Repositorio para tener un punto centralizado en el que guardar el material de las charlas (presentaciones, notebooks de jupyter), datos de los autores, enlaces relacionados, etc.
 
