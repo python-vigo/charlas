@@ -1,3 +1,6 @@
+.. image:: https://travis-ci.com/python-vigo/charlas.svg?branch=master
+    :target: https://travis-ci.com/python-vigo/charlas
+
 Repositorio para tener un punto centralizado en el que guardar el material de las charlas (presentaciones, notebooks de jupyter), datos de los autores, enlaces relacionados, etc.
 
 La idea es, como diría Miguel, "vendorizar" las slides y material en general, y en el README de cada charla poner información del ponente, el enlace al repo original de las slides, etc.
