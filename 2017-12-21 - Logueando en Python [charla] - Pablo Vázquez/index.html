@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Pablo Vázquez Rodríguez">
+  <meta name="author" content="pablo.vazquez.dev@gmail.com">
+  <title>Logueando con Python</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="revealjs/css/reveal.css">
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  <link rel="stylesheet" href="revealjs/css/theme/solarized.css" id="theme">
+<link rel="stylesheet" href="markdownrevealstyle/custom.css">
+  <!-- Printing and PDF exports -->
+  <script>
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? 'revealjs/css/print/pdf.css' : 'revealjs/css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script>
+  <!--[if lt IE 9]>
+  <script src="revealjs/lib/js/html5shiv.js"></script>
+  <![endif]-->
+
+<script src="//twemoji.maxcdn.com/2/twemoji.min.js?2.4"></script>
+<script>
+  function addEvent(element, eventName, fn) {
+    if (element.addEventListener)
+      element.addEventListener(eventName, fn, false);
+    else if (element.attachEvent)
+      element.attachEvent('on' + eventName, fn);
+  }
+
+  addEvent(window, 'load', function() {
+    twemoji.parse(document.body, {'folder': 'svg', 'ext': '.svg'});
+  });
+</script>
+
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section data-background="style/background.svg">
+  <h1 class="title">Logueando con Python</h1>
+  <h2 class="author">Pablo Vázquez Rodríguez</h2>
+  <h2 class="author"><script type="text/javascript">
+<!--
+h='&#x67;&#x6d;&#x61;&#x69;&#108;&#46;&#x63;&#x6f;&#x6d;';a='&#64;';n='&#112;&#x61;&#98;&#108;&#x6f;&#46;&#118;&#x61;&#122;&#x71;&#x75;&#x65;&#122;&#46;&#100;&#x65;&#118;';e=n+a+h;
+document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\/'+'a'+'>');
+// -->
+</script><noscript>&#112;&#x61;&#98;&#108;&#x6f;&#46;&#118;&#x61;&#122;&#x71;&#x75;&#x65;&#122;&#46;&#100;&#x65;&#118;&#32;&#x61;&#116;&#32;&#x67;&#x6d;&#x61;&#x69;&#108;&#32;&#100;&#x6f;&#116;&#32;&#x63;&#x6f;&#x6d;</noscript></h2>
+  <h3 class="date">20-12-2017</h3>
+</section>
+
+<section data-background="style/background.svg"><section id="qué-es-loguear" class="titleslide slide level1"><h1>¿Qué es loguear?</h1></section><section class="slide level2">
+
+<blockquote>
+<p>Registrar acciones y estado de una aplicación en un soporte secundario</p>
+</blockquote>
+<div class="fragment">
+<ul>
+<li>Salida estándar</li>
+<li>Fichero</li>
+<li>Socket</li>
+<li>...</li>
+</ul>
+</div>
+</section></section>
+<section data-background="style/background.svg"><section id="por-qué-loguear" class="titleslide slide level1"><h1>¿Por qué loguear?</h1></section><section class="slide level2">
+
+<ul>
+<li><p><strong>Diagnosticos</strong>: Cuando sucede un error podemos localizar en el código los logs previos al error para obtener contexto</p></li>
+<li><p><strong>Auditoría</strong>: Analizar los datos generados para generar información útil de nuestro negocio</p></li>
+</ul>
+</section><section class="slide level2">
+
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">...
+ERROR:__main__:Failed to <span class="bu">open</span> <span class="bu">file</span>
+Traceback (most recent call last):
+  File <span class="st">&quot;example.py&quot;</span>, line <span class="dv">6</span>, <span class="op">in</span> <span class="op">&lt;</span>module<span class="op">&gt;</span>
+      <span class="bu">open</span>(<span class="st">&#39;/path/to/does/not/exist&#39;</span>, <span class="st">&#39;rb&#39;</span>)
+      <span class="pp">IOError</span>: [Errno <span class="dv">2</span>] No such <span class="bu">file</span> <span class="op">or</span> directory: <span class="st">&#39;/path/to/does/not/exist&#39;</span>
+...</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">[<span class="kw">14583.203580</span>] ata5: SATA link down (SStatus 0 SControl 300)
+[<span class="kw">14583.214663</span>] ata6: SATA link down (SStatus 0 SControl 300)
+[<span class="kw">14583.228545</span>] nouveau 0000:03:00.0: DRM: resuming console...
+[<span class="kw">14583.441889</span>] firewire_core 0000:05:00.0: rediscovered device fw0
+[<span class="kw">14583.606465</span>] nouveau 0000:02:00.0: DRM: resuming fence...
+<span class="kw">...</span></code></pre></div>
+</section><section class="slide level2">
+
+<figure>
+<img src="./images/auditoria.png" alt="https://maurom.com/blog/2014/12/22/analizando-logs-en-5-minutos-con-elk/" style="width:100.0%" /><figcaption>https://maurom.com/blog/2014/12/22/analizando-logs-en-5-minutos-con-elk/</figcaption>
+</figure>
+</section></section>
+<section data-background="style/background.svg"><section id="por-qué-usar-logging-y-no-prints" class="titleslide slide level1"><h1>¿Por qué usar logging y no prints?</h1></section><section class="slide level2">
+
+<p><strong>print</strong> = texto por salida estándar</p>
+<p><strong>log</strong> = texto sensible al contexto</p>
+</section><section id="algunas-ventajas-de-usar-logging" class="slide level2">
+<h1>Algunas ventajas de usar logging</h1>
+<ul>
+<li><p><strong>Categorización</strong></p></li>
+<li><p><strong>Separación de responsabilidades</strong>: Usuarios con distinto nivel de responsabilidades pueden prescindir de los logs que no les interesen</p></li>
+</ul>
+<figure>
+<img src="./images/categorias_log.png" style="width:25.0%" />
+</figure>
+<section data-markdown="presentation.md" data-separator="^\n\n\n" data-separator-vertical="^\n\n" data-separator-notes="^Note:">
+<aside class="notes">
+Ej. El programador decide qué lugares del código pueden generar un log y con qué nivel. El sysadmin decide qué nivel de logs le interesa que se lleven a cabo.
+</aside>
+</section>
+</section></section>
+<section data-background="style/background.svg"><section id="uso-básico" class="titleslide slide level1"><h1>Uso básico</h1></section><section class="slide level2">
+
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> logging
+logging.basicConfig(level<span class="op">=</span>logging.INFO)
+logger <span class="op">=</span> logging.getLogger()
+logger.warning(<span class="st">&#39;WARNING &gt;= INFO por tanto este mensaje se mostrará&#39;</span>)
+logger.debug(<span class="st">&#39;DEBUG &lt; INFO por tanto este mensaje NO se mostrará&#39;</span>)
+<span class="co"># Esta segunda ejecución no tendrá ningún efecto</span>
+logging.basicConfig(level<span class="op">=</span>logging.CRITICAL)</code></pre></div>
+<p><strong>NOTA</strong></p>
+<p>basicConfig sólo funciona la primera vez que se llama durante la ejecución.</p>
+</section><section class="slide level2">
+
+<table>
+<colgroup>
+<col style="width: 13%" />
+<col style="width: 56%" />
+<col style="width: 30%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Nombre</th>
+<th style="text-align: left;">Descripción</th>
+<th style="text-align: left;">Ejemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">filename</td>
+<td style="text-align: left;">Usa FileHandler con la ruta de fichero</td>
+<td style="text-align: left;">&quot;/var/logs/logs.txt&quot;</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">format</td>
+<td style="text-align: left;">Formato de la cadena</td>
+<td style="text-align: left;">&quot;'%(asctime)s %(message)s'&quot;</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">datefmt</td>
+<td style="text-align: left;">Formato de fecha</td>
+<td style="text-align: left;">&quot;%H:%M:%S&quot;</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">level</td>
+<td style="text-align: left;">Nivel del logger raíz</td>
+<td style="text-align: left;">&quot;INFO&quot;</td>
+</tr>
+</tbody>
+</table>
+</section><section id="limitaciones-de-basicconfig" class="slide level2">
+<h1>Limitaciones de basicConfig</h1>
+<p>Y si queremos que los logs...</p>
+<ul>
+<li><p>... se escriban en un fichero, pero se cree un fichero diferente cada día?</p></li>
+<li><p>... se dirijan a un email, servidor web, etc?</p></li>
+<li><p>... contenga información extra sobre el contexto en el que se genera el mensaje (ips, módulos,...)?</p></li>
+</ul>
+</section></section>
+<section data-background="style/background.svg"><section id="uso-avanzado" class="titleslide slide level1"><h1>Uso avanzado</h1></section><section class="slide level2">
+
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">config <span class="op">=</span> {
+    <span class="st">&#39;disable_existing_loggers&#39;</span>: <span class="va">False</span>,  <span class="co"># Avoid dictConfig to disable previously instantiated global loggers</span>
+    <span class="co">&#39;version&#39;</span>: <span class="dv">1</span>,
+    <span class="co">&#39;formatters&#39;</span>: {
+        <span class="st">&#39;short&#39;</span>: {
+            <span class="st">&#39;format&#39;</span>: <span class="st">&#39;</span><span class="sc">%(asctime)s</span><span class="st"> </span><span class="sc">%(levelname)s</span><span class="st"> </span><span class="sc">%(name)s</span><span class="st">: </span><span class="sc">%(message)s</span><span class="st">&#39;</span>
+        },
+    },
+    <span class="co">&#39;handlers&#39;</span>: {
+        <span class="st">&#39;console&#39;</span>: {
+            <span class="st">&#39;level&#39;</span>: <span class="st">&#39;INFO&#39;</span>,
+            <span class="co">&#39;formatter&#39;</span>: <span class="st">&#39;short&#39;</span>,
+            <span class="co">&#39;class&#39;</span>: <span class="st">&#39;logging.StreamHandler&#39;</span>,
+            <span class="co">&#39;filters&#39;</span>: [<span class="st">&#39;MyFilter&#39;</span>, <span class="st">&#39;ContextFilter&#39;</span>]
+        },
+        <span class="co">&#39;file&#39;</span>: {
+            <span class="st">&#39;level&#39;</span>: <span class="st">&#39;INFO&#39;</span>,
+            <span class="co">&#39;class&#39;</span>: <span class="st">&#39;logging.FileHandler&#39;</span>
+        }
+    },
+    <span class="co">&#39;loggers&#39;</span>: {
+        <span class="st">&#39;&#39;</span>: {
+            <span class="st">&#39;handlers&#39;</span>: [<span class="st">&#39;console&#39;</span>],
+            <span class="co">&#39;level&#39;</span>: <span class="st">&#39;ERROR&#39;</span>,
+        },
+        <span class="co">&#39;plugins&#39;</span>: {
+            <span class="st">&#39;handlers&#39;</span>: [<span class="st">&#39;file&#39;</span>],
+            <span class="co">&#39;level&#39;</span>: <span class="st">&#39;INFO&#39;</span>,
+            <span class="co">&#39;propagate&#39;</span>: <span class="va">False</span>
+        },
+        <span class="co">&#39;sistema&#39;</span>: {
+            <span class="st">&#39;handlers&#39;</span>: [<span class="st">&#39;console&#39;</span>],
+            <span class="co">&#39;level&#39;</span>: <span class="st">&#39;INFO&#39;</span>,
+        }
+
+    },
+}
+<span class="im">import</span> logging.config
+logging.config.dictConfig(config)</code></pre></div>
+</section><section id="por-partes..." class="slide level2">
+<h1>Por partes...</h1>
+</section><section class="slide level2">
+
+<p><strong>LOGGER</strong></p>
+<p>Objeto a través del cuál se trata de emitir un mensaje categorizado</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">my_logger <span class="op">=</span> logging.getLogger()
+my_logger.critical(<span class="st">&#39;Todo ha fallado. Entremos en pánico&#39;</span>)</code></pre></div>
+</section><section class="slide level2">
+
+<p><strong>LOG RECORD</strong></p>
+<ul>
+<li><p>Cada vez que un Logger trata de emitir un mensaje, se genera un objeto <strong><em>Log Record</em></strong></p></li>
+<li><p>Los <strong><em>Log Records</em></strong> además del mensaje y el nivel contienen datos de contexto (fecha, módulo, proceso, hilo, ...)</p></li>
+</ul>
+</section><section class="slide level2">
+
+<p><strong>HANDLER</strong></p>
+<p>Recibe un Log Record y lo procesa a alguna salida según sus instrucciones</p>
+<ul>
+<li>FileHandler</li>
+<li>TimedRotatingFileHandler</li>
+<li>StreamHandler</li>
+<li>SMTPHandler</li>
+<li>SocketHandler</li>
+<li>HTTPHandler</li>
+</ul>
+</section><section class="slide level2">
+
+<p><strong>FORMATTER</strong></p>
+<p>Recibe un Log Record y lo serializa como cadena de texto en base al esquema que tenga definido</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co">&#39;%(asctime)s %(levelname)s %(name)s: %(message)s&#39;</span>
+<span class="dv">2017-09-21</span> <span class="dv">18</span>:<span class="dv">42</span>:<span class="dv">11</span>,<span class="dv">625</span> ERROR testing.loggers: Error al procesar...</code></pre></div>
+<p><a href="https://docs.python.org/3/library/logging.html#logrecord-attributes" class="uri">https://docs.python.org/3/library/logging.html#logrecord-attributes</a></p>
+</section><section class="slide level2">
+
+<p><strong>FILTER</strong></p>
+<p>Recibe un Log Record y puede hacer dos cosas:</p>
+<ul>
+<li><p>Decidir si cumple las condiciones para ser emitido</p></li>
+<li><p>Modificarlo para añadirle información extra</p></li>
+</ul>
+<p>Se pueden aplicar múltiples filtros tanto a <strong><em>Loggers</em></strong> como a <strong><em>Handlers</em></strong>, teniendo que cumplirse las condiciones de todos ellos para que el mensaje se emita finalmente</p>
+</section><section class="slide level2">
+
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">config <span class="op">=</span> {
+    <span class="st">&#39;disable_existing_loggers&#39;</span>: <span class="va">False</span>,  <span class="co"># Avoid dictConfig to disable previously instantiated global loggers</span>
+    <span class="co">&#39;version&#39;</span>: <span class="dv">1</span>,
+    <span class="co">&#39;formatters&#39;</span>: {
+        <span class="st">&#39;short&#39;</span>: {
+            <span class="st">&#39;format&#39;</span>: <span class="st">&#39;</span><span class="sc">%(asctime)s</span><span class="st"> </span><span class="sc">%(levelname)s</span><span class="st"> </span><span class="sc">%(name)s</span><span class="st">: </span><span class="sc">%(message)s</span><span class="st">&#39;</span>
+        },
+    },
+    <span class="co">&#39;handlers&#39;</span>: {
+        <span class="st">&#39;console&#39;</span>: {
+            <span class="st">&#39;level&#39;</span>: <span class="st">&#39;INFO&#39;</span>,
+            <span class="co">&#39;formatter&#39;</span>: <span class="st">&#39;short&#39;</span>,
+            <span class="co">&#39;class&#39;</span>: <span class="st">&#39;logging.StreamHandler&#39;</span>,
+            <span class="co">&#39;filters&#39;</span>: [<span class="st">&#39;MyFilter&#39;</span>, <span class="st">&#39;ContextFilter&#39;</span>]
+        },
+        <span class="co">&#39;file&#39;</span>: {
+            <span class="st">&#39;level&#39;</span>: <span class="st">&#39;INFO&#39;</span>,
+            <span class="co">&#39;class&#39;</span>: <span class="st">&#39;logging.FileHandler&#39;</span>
+        }
+    },
+    <span class="co">&#39;loggers&#39;</span>: {
+        <span class="st">&#39;&#39;</span>: {
+            <span class="st">&#39;handlers&#39;</span>: [<span class="st">&#39;console&#39;</span>],
+            <span class="co">&#39;level&#39;</span>: <span class="st">&#39;ERROR&#39;</span>,
+        },
+        <span class="co">&#39;plugins&#39;</span>: {
+            <span class="st">&#39;handlers&#39;</span>: [<span class="st">&#39;file&#39;</span>],
+            <span class="co">&#39;level&#39;</span>: <span class="st">&#39;INFO&#39;</span>,
+            <span class="co">&#39;propagate&#39;</span>: <span class="va">False</span>
+        },
+        <span class="co">&#39;sistema&#39;</span>: {
+            <span class="st">&#39;handlers&#39;</span>: [<span class="st">&#39;console&#39;</span>],
+            <span class="co">&#39;level&#39;</span>: <span class="st">&#39;INFO&#39;</span>,
+        }
+
+    },
+}
+<span class="im">import</span> logging.config
+logging.config.dictConfig(config)</code></pre></div>
+</section></section>
+<section data-background="style/background.svg"><section id="apunte-final" class="titleslide slide level1"><h1>Apunte final</h1></section><section id="jerarquía-de-loggers" class="slide level2">
+<h1>Jerarquía de Loggers</h1>
+<p>Si al obtener un logger, lo hacemos con <strong><em>dot notation</em></strong></p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">my_logger <span class="op">=</span> logging.getLogger(<span class="st">&#39;plugins.sistema&#39;</span>)</code></pre></div>
+<p>El Log Record se procesará recursivamente por los handler que correspondan, hasta que se llegue o al raíz o a alguno que tenga &quot;propagate: False&quot;</p>
+<p>En este ejemplo, se procesará por el handler 'sistema' y después por el handler 'plugins'</p>
+</section><section class="slide level2">
+
+<p>Recordemos que la variable global __name__ en python suele guardar una cadena con la jerarquía de módulos separados por punto...😍</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># __name__ = projectA.moduleB.moduleC...</span>
+my_logger <span class="op">=</span> logging.getLogger(<span class="va">__name__</span>)</code></pre></div>
+</section></section>
+<section data-background="style/background.svg"><section id="resumiendo" class="titleslide slide level1"><h1>Resumiendo</h1></section><section class="slide level2">
+
+<figure>
+<img src="./images/flujo_logging_sides.jpg" />
+</figure>
+</section><section id="más-información" class="slide level2">
+<h1>Más información</h1>
+<p><em>A guide to logging in Python</em> (Mario Corchero)<br />
+<a href="https://opensource.com/article/17/9/python-logging" class="uri">https://opensource.com/article/17/9/python-logging</a></p>
+<p><em>Python Logging documentation</em><br />
+<a href="https://docs.python.org/3/library/logging.html" class="uri">https://docs.python.org/3/library/logging.html</a></p>
+<p><em>Markdownreveal</em><br />
+<a href="http://markdownreveal.readthedocs.io" class="uri">http://markdownreveal.readthedocs.io</a></p>
+</section></section>
+    </div>
+  </div>
+
+  <script src="revealjs/lib/js/head.min.js"></script>
+  <script src="revealjs/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        // Display controls in the bottom right corner
+        controls: true,
+        // Display a presentation progress bar
+        progress: true,
+        // Display the page number of the current slide
+        slideNumber: false,
+        // Push each slide change to the browser history
+        history: true,
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+        // Enable the slide overview mode
+        overview: true,
+        // Vertical centering of slides
+        center: true,
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+        // Transition style
+        transition: 'slide', // none/fade/slide/convex/concave/zoom
+        // Transition speed
+        transitionSpeed: 'default', // default/fast/slow
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: 'revealjs/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'revealjs/plugin/zoom-js/zoom.js', async: true },
+          { src: 'revealjs/plugin/notes/notes.js', async: true }
+        ]
+      });
+    </script>
+    </body>
+</html>
