@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Xurxo Fresco - @xurxof" />
+  <title>python gotchas</title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link rel="stylesheet" href="reveal.js/css/reveal.css"/>
+  <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" href="reveal.js/css/theme/beige.css" id="theme">
+
+<!-- For syntax highlighting -->
+  <link rel="stylesheet" href="reveal.js/lib/css/zenburn.css">
+
+
+
+  <!-- If the query includes 'print-pdf', include the PDF print sheet -->
+  <script>
+    if( window.location.search.match( /print-pdf/gi ) ) {
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = 'reveal.js/css/print/pdf.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    }
+  </script>
+  <!--[if lt IE 9]>
+  <script src="reveal.js/lib/js/html5shiv.js"></script>
+  <![endif]-->
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section>
+    <h1 class="title">python gotchas</h1>
+    <h2 class="author">Xurxo Fresco - <span class="citation" data-cites="xurxof">@xurxof</span></h2>
+    <h3 class="date">Python Vigo, Abril 2016</h3>
+</section>
+
+<section><section id="notas" class="titleslide slide level1"><h1>Notas</h1></section><section id="section" class="slide level2">
+<h1></h1>
+<p>Wat/Gotcha: casos extremos y contraituitivos</p>
+<p>Deberíamos juzgar un lenguaje por sus gotchas?</p>
+</section></section>
+<section><section id="precedencia-de-operadores" class="titleslide slide level1"><h1>Precedencia de operadores</h1></section><section id="precedencia-de-operadores-1" class="slide level2">
+<h1>Precedencia de operadores</h1>
+<pre><code>&gt;&gt;&gt; False == (False in [False])
+... False
+
+&gt;&gt;&gt; (False == False) in [False]
+... False
+
+&gt;&gt;&gt; False == False in [False]
+... ?</code></pre>
+</section><section id="precedencia-de-operadores-2" class="slide level2">
+<h1>Precedencia de operadores</h1>
+<pre><code>&gt;&gt;&gt; False == (False in [False])
+... False
+
+&gt;&gt;&gt; (False == False) in [False]
+... False
+
+&gt;&gt;&gt; False == False in [False]
+... True</code></pre>
+</section><section id="precedencia-de-operadores-3" class="slide level2">
+<h1>Precedencia de operadores</h1>
+<pre><code>&gt;&gt;&gt; False == False in [False]
+True
+
+- `in` es un operador logico
+- Todos los operadores lógicos tiene la misma precedencia
+- Las operaciones del tipo 1&lt;a&lt;3 se evaluan como 1&lt;a and a&lt;2
+
+&gt;&gt;&gt; False == False and False in [False]
+True</code></pre>
+</section></section>
+<section><section id="diccionarios" class="titleslide slide level1"><h1>Diccionarios</h1></section><section id="diccionarios-1" class="slide level2">
+<h1>Diccionarios</h1>
+<pre><code>&gt;&gt;&gt; data = {
+...     1: &#39;one&#39;,
+...     &#39;1&#39;: &#39;two&#39;,
+...     True: &#39;true&#39;,
+... }
+
+&gt;&gt;&gt; data
+
+?</code></pre>
+</section><section id="diccionarios-2" class="slide level2">
+<h1>Diccionarios</h1>
+<pre><code>&gt;&gt;&gt; data = {
+...     1: &#39;one&#39;,
+...     &#39;1&#39;: &#39;two&#39;,
+...     True: &#39;true&#39;,
+... }
+
+&gt;&gt;&gt; data
+
+{1: &#39;true&#39;, &#39;1&#39;: &#39;two&#39;}</code></pre>
+<p>&quot;The Boolean type is a subtype of the integer type, and Boolean values behave like the values 0 and 1&quot;</p>
+</section></section>
+<section><section id="is" class="titleslide slide level1"><h1>Is</h1></section><section id="is-1" class="slide level2">
+<h1>Is</h1>
+<pre><code>&gt;&gt;&gt; a = 256
+&gt;&gt;&gt; b = 256
+&gt;&gt;&gt; a is b
+True</code></pre>
+</section><section id="is-2" class="slide level2">
+<h1>Is</h1>
+<pre><code>&gt;&gt;&gt; a = 257
+&gt;&gt;&gt; b = 257
+&gt;&gt;&gt; a is b
+False</code></pre>
+</section><section id="is-3" class="slide level2">
+<h1>Is</h1>
+<pre><code>&gt;&gt;&gt; a = 257
+&gt;&gt;&gt; b = 257
+&gt;&gt;&gt; a is b
+False
+
+&gt;&gt;&gt; a = 257; b = 257
+&gt;&gt;&gt; a is b
+?</code></pre>
+</section><section id="is-4" class="slide level2">
+<h1>Is</h1>
+<pre><code>&gt;&gt;&gt; a = 257
+&gt;&gt;&gt; b = 257
+&gt;&gt;&gt; a is b
+False
+
+&gt;&gt;&gt; a = 257; b = 257
+&gt;&gt;&gt; a is b
+True</code></pre>
+</section><section id="is-5" class="slide level2">
+<h1>Is</h1>
+<pre><code>&gt;&gt;&gt; code_obj_a = compile (source=&quot;a = 257&quot;, filename=&quot;&quot;, mode=&quot;exec&quot;)
+
+&gt;&gt;&gt; code_obj_a.co_consts
+(257,None)</code></pre>
+</section><section id="is-6" class="slide level2">
+<h1>Is</h1>
+<pre><code>&gt;&gt;&gt; code_obj_a = compile (source=&quot;a = 257; b = 257&quot;, filename=&quot;&quot;, mode=&quot;exec&quot;) 
+
+&gt;&gt;&gt; code_obj_a.co_consts
+(257,None)
+</code></pre>
+</section><section id="is-7" class="slide level2">
+<h1>Is</h1>
+<pre><code># ver:
+http://www.laurentluce.com/posts/python-integer-objects-implementation/
+</code></pre>
+</section></section>
+<section><section id="argumentos-por-defecto" class="titleslide slide level1"><h1>Argumentos por defecto</h1></section><section id="argumentos-por-defecto-1" class="slide level2">
+<h1>Argumentos por defecto</h1>
+<pre><code>&gt;&gt;&gt; def foo(l=[]):
+...     l.append(&#39;cat&#39;)
+...     return l
+
+
+&gt;&gt;&gt; foo()
+[&#39;cat&#39;]
+
+&gt;&gt;&gt; foo()
+[&#39;cat&#39;, &#39;cat&#39;]
+
+# Parece que l=[] se ejectua sólo una vez (cuando definimos la función).
+# Si es así entonces...</code></pre>
+</section><section id="argumentos-por-defecto-2" class="slide level2">
+<h1>Argumentos por defecto</h1>
+<pre><code>&gt;&gt; def bar(l=[]):
+...     print (locals())
+...     l = [&#39;cat&#39;]
+...     return l
+...
+
+&gt;&gt;&gt; bar()
+# ? {&#39;l&#39;: []}
+# ? [&#39;cat&#39;]
+
+&gt;&gt;&gt; bar()
+# ? {&#39;l&#39;: [&#39;cat&#39;]}
+# ? [&#39;cat&#39;]</code></pre>
+</section><section id="argumentos-por-defecto-3" class="slide level2">
+<h1>Argumentos por defecto</h1>
+<pre><code>&gt;&gt;&gt; def bar(l=[]):
+...     print (locals())
+...     l = [&#39;cat&#39;]
+...     return l
+...
+
+&gt;&gt;&gt; bar()
+{&#39;l&#39;: []}
+[&#39;cat&#39;]
+
+&gt;&gt;&gt; bar()
+{&#39;l&#39;: []}
+[&#39;cat&#39;]</code></pre>
+</section><section id="argumentos-por-defecto-4" class="slide level2">
+<h1>Argumentos por defecto</h1>
+<pre><code>&gt;&gt;&gt; def foo(l=[]):
+...     l.append(&#39;cat&#39;)
+...     return l
+...
+
+&gt;&gt;&gt; foo.__defaults__ # foo.func_defaults en Py 2
+([&#39;cat&#39;],)
+
+&gt;&gt;&gt; foo.__defaults__[0].append(&#39;dragon&#39;)
+&gt;&gt;&gt; foo.__defaults__
+([&#39;cat&#39;, &#39;dragon&#39;],)
+
+&gt;&gt;&gt; foo()
+[&#39;cat&#39;, &#39;dragon&#39;, &#39;cat&#39;]</code></pre>
+</section><section id="argumentos-por-defecto-5" class="slide level2">
+<h1>Argumentos por defecto</h1>
+<pre><code>&gt;&gt;&gt; def bar(l=[]):
+...     print locals()
+...     l = [&#39;cat&#39;]
+...     return l
+
+
+&gt;&gt;&gt; bar.__defaults__
+([],)
+
+&gt;&gt;&gt; bar()
+{&#39;l&#39;: []} ## locals
+[&#39;cat&#39;]
+
+&gt;&gt;&gt; bar.__defaults__
+([],)
+
+# Al reasignar &#39;l&#39; a otra lista, no se modifica la lista contenida en __defaults__
+# por eso funciona lo siguiente:
+
+def append_to(element, to=None):
+    if to is None:
+        to = []
+    to.append(element)
+    return to</code></pre>
+</section></section>
+<section><section id="variables-de-clase" class="titleslide slide level1"><h1>Variables de clase</h1></section><section id="variables-de-clase-1" class="slide level2">
+<h1>Variables de clase</h1>
+<pre><code>class AAA(object):
+    x = 1
+
+class BBB(AAA):
+    pass
+
+class CCC(AAA):
+    pass
+
+
+&gt;&gt;&gt; print AAA.x, BBB.x, CCC.x
+?
+
+&gt;&gt;&gt; BBB.x = 2
+
+&gt;&gt;&gt; print AAA.x, BBB.x, CCC.x
+?
+
+
+&gt;&gt;&gt; AAA.x = 3
+
+&gt;&gt;&gt; print AAA.x, BBB.x, CCC.x
+?</code></pre>
+</section><section id="variables-de-clase-2" class="slide level2">
+<h1>Variables de clase</h1>
+<pre><code>class AAA(object):
+    x = 1
+
+class BBB(AAA):
+    pass
+
+class CCC(AAA):
+    pass
+
+# AAA: {&#39;x&#39;: 1}, BBB: {}, CCC: {}
+&gt;&gt;&gt; print AAA.x, BBB.x, CCC.x
+1 1 1
+
+&gt;&gt;&gt; BBB.x = 2
+# AAA: {&#39;x&#39;: 1}, BBB: {&#39;x&#39;: 2}, CCC: {}
+&gt;&gt;&gt; print AAA.x, BBB.x, CCC.x
+1 2 1
+
+
+&gt;&gt;&gt; AAA.x = 3
+# AAA: {&#39;x&#39;: 3}, BBB: {&#39;x&#39;: 2}, CCC: {}
+&gt;&gt;&gt; print AAA.x, BBB.x, CCC.x
+3 2 3</code></pre>
+</section></section>
+<section><section id="mutability" class="titleslide slide level1"><h1>Mutability</h1></section><section id="mutability-1" class="slide level2">
+<h1>Mutability</h1>
+<pre><code>&gt;&gt;&gt; a = ([42],)
+&gt;&gt;&gt; a[0] += [43, 44]
+Traceback (most recent call last):
+  File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;
+TypeError: &#39;tuple&#39; object does not support item assignment</code></pre>
+</section><section id="mutability-2" class="slide level2">
+<h1>Mutability</h1>
+<pre><code>&gt;&gt;&gt; a = ([42],)
+&gt;&gt;&gt; a[0] += [43, 44]
+Traceback (most recent call last):
+  File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;
+TypeError: &#39;tuple&#39; object does not support item assignment
+
+&gt;&gt;&gt; a
+([42, 43, 44],)</code></pre>
+</section><section id="mutability-3" class="slide level2">
+<h1>Mutability</h1>
+<pre><code>&gt;&gt;&gt; a = ([42],)
+&gt;&gt;&gt; a[0] += [43, 44]
+Traceback (most recent call last):
+  File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;
+TypeError: &#39;tuple&#39; object does not support item assignment
+
+&gt;&gt;&gt; a
+([42, 43, 44],)
+
+
+&gt;&gt;&gt; a = ([42],)
+&gt;&gt;&gt; b = a[0]
+&gt;&gt;&gt; b += [43, 44]
+
+&gt;&gt;&gt; a
+([42, 43, 44],)</code></pre>
+</section></section>
+<section><section id="all-and-emptiness" class="titleslide slide level1"><h1>all and emptiness</h1></section><section id="all-and-emptiness-1" class="slide level2">
+<h1>all and emptiness</h1>
+<pre><code>&gt;&gt;&gt; all([])
+True
+
+
+
+</code></pre>
+</section><section id="all-and-emptiness-2" class="slide level2">
+<h1>all and emptiness</h1>
+<pre><code>&gt;&gt;&gt; all([])
+True
+&gt;&gt;&gt; all([[]])
+False
+
+</code></pre>
+</section><section id="all-and-emptiness-3" class="slide level2">
+<h1>all and emptiness</h1>
+<pre><code>&gt;&gt;&gt; all([])
+True
+&gt;&gt;&gt; all([[]])
+False
+&gt;&gt;&gt; all([[[]]])
+True</code></pre>
+</section><section id="all-and-emptiness-4" class="slide level2">
+<h1>all and emptiness</h1>
+<pre><code>&gt;&gt;&gt; all([])         ## por definicion de la funcion
+True
+&gt;&gt;&gt; all([[]])
+False
+&gt;&gt;&gt; all([[[]]])
+True</code></pre>
+</section><section id="all-and-emptiness-5" class="slide level2">
+<h1>all and emptiness</h1>
+<pre><code>&gt;&gt;&gt; all([])         ## por definicion de la funcion
+True
+&gt;&gt;&gt; all([[]])       ## bool([]) -&gt; False
+False
+&gt;&gt;&gt; all([[[]]])     
+True</code></pre>
+</section><section id="all-and-emptiness-6" class="slide level2">
+<h1>all and emptiness</h1>
+<pre><code>&gt;&gt;&gt; all([])         ## por definicion de la funcion
+True
+&gt;&gt;&gt; all([[]])       ## [[]] -&gt; [False]
+False
+&gt;&gt;&gt; all([[[]]])     
+True</code></pre>
+</section><section id="all-and-emptiness-7" class="slide level2">
+<h1>all and emptiness</h1>
+<pre><code>&gt;&gt;&gt; all([])         ## por definicion de la funcion
+True
+&gt;&gt;&gt; all([[]])       ## [[]] -&gt; [False]
+False
+&gt;&gt;&gt; all([[[]]])     ## bool ( [False]) -&gt; True
+True</code></pre>
+</section><section id="all-and-emptiness-8" class="slide level2">
+<h1>all and emptiness</h1>
+<pre><code>&gt;&gt;&gt; all([])         ## por definicion de la funcion
+True
+&gt;&gt;&gt; all([[]])       ## [[]] -&gt; [False]
+False
+&gt;&gt;&gt; all([[[]]])     ## [[[]]] -&gt; [[False]] -&gt; [True] 
+True</code></pre>
+</section></section>
+<section><section id="nan" class="titleslide slide level1"><h1>nan</h1></section><section id="nan-1" class="slide level2">
+<h1>nan</h1>
+<pre><code>&gt;&gt;&gt; x = float(&quot;nan&quot;)
+&gt;&gt;&gt; len({x, x, float(x), float(x), float(&quot;nan&quot;), float(&quot;nan&quot;)})
+?
+&gt;&gt;&gt; len({x, float(x), float(&quot;nan&quot;)})
+?</code></pre>
+</section><section id="nan-2" class="slide level2">
+<h1>nan</h1>
+<pre><code>&gt;&gt;&gt; x = float(&quot;nan&quot;)
+&gt;&gt;&gt; len({x, x, float(x), float(x), float(&quot;nan&quot;), float(&quot;nan&quot;)})
+3
+&gt;&gt;&gt; len({x, float(x), float(&quot;nan&quot;)})
+2</code></pre>
+</section><section id="nan-3" class="slide level2">
+<h1>nan</h1>
+<pre><code>&gt;&gt;&gt; x = float(&quot;nan&quot;)
+&gt;&gt;&gt; {x, x, float(x), float(x), float(&quot;nan&quot;), float(&quot;nan&quot;)}
+set([nan, nan, nan])
+&gt;&gt;&gt; {x, float(x), float(&quot;nan&quot;)}
+set([nan, nan])</code></pre>
+</section><section id="nan-4" class="slide level2">
+<h1>nan</h1>
+<pre><code>&gt;&gt;&gt; x is x
+True
+&gt;&gt;&gt; float(x)==float(x)
+True
+&gt;&gt;&gt; float(x)==x
+True
+&gt;&gt;&gt; float(&quot;nan&quot;) == float(&quot;nan&quot;)
+False</code></pre>
+</section></section>
+<section><section id="iteradores" class="titleslide slide level1"><h1>Iteradores</h1></section><section id="iteradores-1" class="slide level2">
+<h1>Iteradores</h1>
+<pre><code>&gt;&gt;&gt; a = 2, 1, 3
+&gt;&gt;&gt; sorted(a) == sorted(a)
+?
+&gt;&gt;&gt; reversed(a) == reversed(a)
+?</code></pre>
+</section><section id="iteradores-2" class="slide level2">
+<h1>Iteradores</h1>
+<pre><code>&gt;&gt;&gt; a = 2, 1, 3
+&gt;&gt;&gt; sorted(a) == sorted(a)
+True
+&gt;&gt;&gt; reversed(a) == reversed(a)
+False</code></pre>
+</section></section>
+<section><section id="isinstance-metaclases" class="titleslide slide level1"><h1>isinstance &amp; metaclases</h1></section><section id="section-1" class="slide level2">
+<h1></h1>
+<pre><code>&gt;&gt;&gt; isinstance (type, object)
+&gt;&gt;&gt; ?
+&gt;&gt;&gt; isinstance (object, type)
+&gt;&gt;&gt; ?
+</code></pre>
+</section><section id="isinstance-metaclases-1" class="slide level2">
+<h1>isinstance &amp; metaclases</h1>
+<pre><code>&gt;&gt;&gt; isinstance (type, object)
+&gt;&gt;&gt; true
+&gt;&gt;&gt; isinstance (object, type)
+&gt;&gt;&gt; true
+</code></pre>
+</section></section>
+<section><section id="referencias" class="titleslide slide level1"><h1>Referencias</h1></section><section id="referencias-1" class="slide level2">
+<h1>Referencias</h1>
+<p>http://stackoverflow.com/questions/530530/python-2-x-gotchas-and-landmines</p>
+<p>https://www.youtube.com/watch?v=sH4XF6pKKmk</p>
+<p>https://github.com/cosmologicon/pywat</p>
+<p>https://docs.python.org/3/faq/programming.html#why-does-a-tuple-i-item-raise-an-exception-when-the-addition-works</p>
+</section></section>
+    </div>
+  </div>
+
+
+  <script src="reveal.js/lib/js/head.min.js"></script>
+  <script src="reveal.js/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available here:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        controls: true,         // Display controls in the bottom right corner
+        progress: true,         // Display a presentation progress bar
+        history: true,          // Push each slide change to the browser history
+        center: true,                       // Vertical centering of slides
+        maxScale: 1.5,                  // Bounds for smallest/largest possible content scale
+        slideNumber: false,                // Display the page number of the current slide
+        theme: 'beige', // available themes are in /css/theme
+        transition: 'fade', // default/cube/page/concave/zoom/linear/fade/none
+
+        // Optional libraries used to extend on reveal.js
+        dependencies: [
+          { src: 'reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'reveal.js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+          { src: 'reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+//          { src: 'reveal.js/plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; }, }
+//          { src: 'reveal.js/plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+]});
+    </script>
+    </body>
+</html>
