@@ -8,7 +8,7 @@ import pytest
 
 
 folder_names = [str(x) for x in Path('.').iterdir()
-                if x.is_dir() and not str(x).startswith(('.', '_'))]
+                if x.is_dir() and not str(x).startswith(('.', '_', 'docs'))]
 
 
 def test_date():
