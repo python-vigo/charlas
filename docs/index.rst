@@ -12,10 +12,13 @@ Fecha                Título                                              Tipo  
 2017-12-21           `Logueando en Python`_                              charla              Pablo Vázquez                        
 2017-11-23           `La serpiente y el ratón`_                          charla              Clara Casas, Miguel (Peque)          
 2017-07-20           `Type Hinting básico`_                              lightning           Xurxo Fresco                         
+2017-06-10           `Python para MacGyvers`_                            charla              Clara Casas, Miguel (Peque)          
 2017-03-16           `Presentaciones simples con Markdownreveal`_        relámpago           Miguel (Peque)                       
 2017-02-16           `Soundphy`_                                         workshop            Clara Casas, Miguel (Peque)          
+2016-12-15           `Pickle`_                                           relámpago           Clara Casas                          
 2016-09-17           `Eureka!`_                                          charla              Miguel (Peque)                       
 2016-04-21           `PyGotchas`_                                        charla              Xurxo Fresco                         
+2015-09-17           `Python + ZeroMQ`_                                  charla              Miguel (Peque)                       
 ==================== =================================================== =================== =====================================
 
 .. _`La serpiente y el cerdito`: 2019-01-17%20-%20La%20serpiente%20y%20el%20cerdito%20%5Bcharla%5D%20-%20Clara%20Casas%2C%20Miguel%20%28Peque%29
@@ -28,7 +31,10 @@ Fecha                Título                                              Tipo  
 .. _`Logueando en Python`: 2017-12-21%20-%20Logueando%20en%20Python%20%5Bcharla%5D%20-%20Pablo%20V%C3%A1zquez
 .. _`La serpiente y el ratón`: 2017-11-23%20-%20La%20serpiente%20y%20el%20rat%C3%B3n%20%5Bcharla%5D%20-%20Clara%20Casas%2C%20Miguel%20%28Peque%29
 .. _`Type Hinting básico`: 2017-07-20%20-%20Type%20Hinting%20b%C3%A1sico%20%5Blightning%5D%20-%20Xurxo%20Fresco
+.. _`Python para MacGyvers`: 2017-06-10%20-%20Python%20para%20MacGyvers%20%5Bcharla%5D%20-%20Clara%20Casas%2C%20Miguel%20%28Peque%29
 .. _`Presentaciones simples con Markdownreveal`: 2017-03-16%20-%20Presentaciones%20simples%20con%20Markdownreveal%20%5Brel%C3%A1mpago%5D%20-%20Miguel%20%28Peque%29
 .. _`Soundphy`: 2017-02-16%20-%20Soundphy%20%5Bworkshop%5D%20-%20Clara%20Casas%2C%20Miguel%20%28Peque%29
+.. _`Pickle`: 2016-12-15%20-%20Pickle%20%5Brel%C3%A1mpago%5D%20-%20Clara%20Casas
 .. _`Eureka!`: 2016-09-17%20-%20Eureka%21%20%5Bcharla%5D%20-%20Miguel%20%28Peque%29
 .. _`PyGotchas`: 2016-04-21%20-%20PyGotchas%20%5Bcharla%5D%20-%20Xurxo%20Fresco
+.. _`Python + ZeroMQ`: 2015-09-17%20-%20Python%20%2B%20ZeroMQ%20%5Bcharla%5D%20-%20Miguel%20%28Peque%29
