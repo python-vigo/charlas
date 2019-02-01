@@ -19,6 +19,7 @@ Fecha                Título                                              Tipo  
 2016-09-17           `Eureka!`_                                          charla              Miguel (Peque)                       
 2016-04-21           `PyGotchas`_                                        charla              Xurxo Fresco                         
 2015-09-17           `Python + ZeroMQ`_                                  charla              Miguel (Peque)                       
+2015-07-16           `Django REST Framework`_                            charla              Fabio Souto                          
 ==================== =================================================== =================== =====================================
 
 .. _`La serpiente y el cerdito`: 2019-01-17%20-%20La%20serpiente%20y%20el%20cerdito%20%5Bcharla%5D%20-%20Clara%20Casas%2C%20Miguel%20%28Peque%29
@@ -38,3 +39,4 @@ Fecha                Título                                              Tipo  
 .. _`Eureka!`: 2016-09-17%20-%20Eureka%21%20%5Bcharla%5D%20-%20Miguel%20%28Peque%29
 .. _`PyGotchas`: 2016-04-21%20-%20PyGotchas%20%5Bcharla%5D%20-%20Xurxo%20Fresco
 .. _`Python + ZeroMQ`: 2015-09-17%20-%20Python%20%2B%20ZeroMQ%20%5Bcharla%5D%20-%20Miguel%20%28Peque%29
+.. _`Django REST Framework`: 2015-07-16%20-%20Django%20REST%20Framework%20%5Bcharla%5D%20-%20Fabio%20Souto
