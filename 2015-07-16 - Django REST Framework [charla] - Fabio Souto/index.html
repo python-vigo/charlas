@@ -1,0 +1,499 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Django REST Framework en 20 minutos</title>
+
+		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+		<meta name="author" content="Hakim El Hattab">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="reveal/css/reveal.css">
+		<link rel="stylesheet" href="reveal/css/theme/blood.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="reveal/lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h1>Django REST Framework</h1>
+					<h3>En 20 minutos</h3> <small>(esperemos...)</small>
+					<p>
+						<small><a href="http://fabisouto.me">Fabio Souto</a>  //  <a href="http://github.com/fasouto">@fasouto</a></small>
+					</p>
+				</section>
+
+				<section>
+					<h2>Django?</h2>
+				</section>
+
+				<section>
+					<h2>Django</h2>
+					<p>
+						<p>Framework web para python</p>
+						<ul>
+							<li>ORM</li>
+							<li>Lenguaje de plantillas</li>
+							<li>Auth, Forms...</li>
+						</ul>
+						<p>Tema pendiente en pyvigo :( </p>
+					</p>
+				</section>
+
+				<section>
+					<h2>REST?</h2>
+				</section>
+
+				<section>
+					<h2>REST</h2>
+					<p>
+						<p>Representational State Transfer</p>
+						<p>POST, GET, PUT, DELETE, PATCH.. + URI</p>
+						<p>JSON, XML, YAML...</p>
+						<p>HATEOAS (servicios asociados)</p>
+					</p>
+				</section>
+
+				<section>
+					<h2>REST</h2>
+					<p>
+										<p>Cada vez más necesario:</p>
+						<ul>
+							<li>Frameworks JS modernos (angular, ember)</li>
+							<li>Apps Móviles</li>
+							<li>SAAS</li>
+							<li>...</li>
+						</ul>
+					</p>
+				</section>
+
+				<section>
+					<h2>¿Cómo crear una API en Django?</h2>
+					<p>
+						<div class="fragment">
+						<p>Hacerla de cero:</p>
+						<ul>
+							<li>Versiones</li>
+							<li>Serializar/deserializar</li>
+							<li>Límites</li>
+							<li>Content negotiation</li>
+							<li>...</li>
+						</ul>
+						</div>
+
+						<div class="fragment"><p>No quiero romperme la cabeza:</p>
+						<ul>
+							<li>Django-REST-Framework</li>
+							<li>Tastypie</li>
+						</ul>
+						</div>
+					</p>
+				</section>
+
+				<section>
+					<h2>Django REST Framework</h2>
+					<p>
+						<p>Modular</p>
+						<p>API browser</p>
+						<p>Documentación buena</p>
+						<p>Desarrollo activo</p>
+						<p>Kickstarter</p>
+					</p>
+				</section>
+
+				<section>
+					<h2>Instalación</h2>
+					<p>
+									<pre><code data-trim contenteditable>
+
+$ pip install djangorestframework
+$ pip install django-filter  # Si vamos a usar filtros
+					</code></pre>
+
+									<pre><code data-trim contenteditable>
+
+INSTALLED_APPS = [
+...
+    'rest_framework',
+]
+
+urlpatterns = [
+    ...
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
+]
+					</code></pre>
+
+									<pre><code data-trim contenteditable>
+
+$ python manage.py syncdb
+
+					</code></pre>
+					</p>
+				</section>
+
+
+				<section>
+					<h2>API Django Polls</h2>
+				</section>
+
+				<section>
+					<h2>Django Polls</h2>
+					<p>
+					<pre><code data-trim contenteditable>
+from django.db import models
+
+
+class Question(models.Model):
+    question_text = models.CharField(max_length=200)
+    pub_date = models.DateTimeField('date published')
+
+
+class Choice(models.Model):
+    question = models.ForeignKey(Question)
+    choice_text = models.CharField(max_length=200)
+    votes = models.IntegerField(default=0)
+					</code></pre>
+					</p>
+				</section>
+
+				<section>
+				<section>
+					<h1>Serializadores</h1>
+				</section>
+
+				<section>
+					<h2>Serializadores</h2>
+					<pre><code data-trim contenteditable>
+class QuestionSerializer(serializers.Serializer):
+    pk = serializers.IntegerField(read_only=True)
+    question_text = serializers.CharField(max_length=200)
+    pub_date = serializers.DateTimeField(required=True)
+
+    def create(self, validated_data):
+        """
+        Crea una instancia de Question
+        """
+        return Question.objects.create(**validated_data)
+
+    def update(self, instance, validated_data):
+        """
+        Actualiza una instancia de Question
+        """
+        instance.title = validated_data.get('question_text', instance.title)
+        instance.code = validated_data.get('pub_date', instance.code)
+        instance.save()
+        return instance
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>ModelSerializers</h2>
+					<pre><code data-trim contenteditable>
+class QuestionModelSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Question
+        fields = ('id', 'question_text', 'pub_date')
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>Shell</h2>
+					<pre><code data-trim contenteditable>
+>>> from polls.models import Question
+>>> q = Question.objects.first()
+>>> 
+>>> from polls.serializers import QuestionSerializer
+>>> ser = QuestionSerializer(q)
+>>> ser.data
+{'pk': 1, 'question_text': u'Que "charla" sobre Django te interesaria en python-vigo?', 'pub_date': u'2015-07-16T10:44:11Z'}
+>>> 
+>>> from rest_framework.renderers import JSONRenderer
+>>> print JSONRenderer().render(ser.data)
+{"pk":1,"question_text":"Que \"charla\" sobre Django te interesaria en python-vigo?","pub_date":"2015-07-16T10:44:11Z"}
+>>> 
+>>> from rest_framework_xml.renderers import XMLRenderer
+>>> print XMLRenderer().render(ser.data)
+<?xml version="1.0" encoding="utf-8"?>
+<root><pk>1</pk><question_text>Que "charla" sobre Django te interesaria en python-vigo?</question_text><pub_date>2015-07-16T10:44:11Z</pub_date></root>
+
+					</code></pre>
+				</section>
+		</section>
+
+				<section>
+				<section>
+					<h1>Vistas</h1>
+				</section>
+
+				<section>
+					<h2>Vistas "al estilo Django"</h2>
+					<p>
+					<pre><code data-trim contenteditable>
+class JSONResponse(HttpResponse):
+    def __init__(self, data, **kwargs):
+        content = JSONRenderer().render(data)
+        kwargs['content_type'] = 'application/json'
+        super(JSONResponse, self).__init__(content, **kwargs)
+
+
+@csrf_exempt
+def question_list(request):
+    if request.method == 'GET':
+        questions = Question.objects.all()
+        serializer = QuestionModelSerializer(questions, many=True)
+        return JSONResponse(serializer.data)
+
+    elif request.method == 'POST':
+        data = JSONParser().parse(request)
+        serializer = QuestionModelSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return JSONResponse(serializer.data, status=201)
+        return JSONResponse(serializer.errors, status=400)
+</code></pre>
+					</p>
+				</section>
+
+				<section>
+					<h2>Vistas "al estilo DRF"</h2>
+					<p>
+					<pre><code data-trim contenteditable>
+@api_view(['GET', 'POST'])
+def question_list(request, format=None):
+    if request.method == 'GET':
+        questions = Question.objects.all()
+        serializer = QuestionModelSerializer(questions, many=True)
+        return Response(serializer.data)
+
+    elif request.method == 'POST':
+        serializer = QuestionModelSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+</code></pre>
+					</p>
+				</section>
+
+				<section>
+					<h2>Generic Views</h2>
+					<p>
+					<pre><code data-trim contenteditable>
+class QuestionList(mixins.ListModelMixin,
+                  mixins.CreateModelMixin,
+                  generics.GenericAPIView):
+    queryset = Question.objects.all()
+    serializer_class = QuestionModelSerializer
+
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        return self.create(request, *args, **kwargs)
+
+</code></pre>
+					</p>
+				</section>
+
+				<section>
+					<h2>ViewSets</h2>
+					<p>
+							<pre><code data-trim contenteditable>
+class QuestionViewSet(viewsets.ModelViewSet):
+    """
+    Viewset proporciona listar, actualizar, borrar...
+    """
+    queryset = Question.objects.all()
+    serializer_class = QuestionModelSerializer
+   </code></pre>
+					</p>
+				</section>
+				</section>
+
+				<section>
+					<h2>URLS</h2>
+					<p>
+							<pre><code data-trim contenteditable>
+router = routers.DefaultRouter()
+router.register(r'questions', views.QuestionViewSet)
+
+
+urlpatterns = patterns('polls.views',
+    url(r'^', include(router.urls)),
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
+)
+   </code></pre>
+					</p>
+				</section>
+
+				<section>
+					<h2>API acabada!</h2>
+				</section>
+
+				<section>
+					<h2>API browser</h2>
+					<img data-src="img/api_browser.png" alt="API browser">
+
+				</section>
+
+				<section>
+					<h2>httpie</h2>
+					
+							<pre><code data-trim contenteditable>
+
+pyvigorest ⚡  http http://127.0.0.1:8000/questions/.json
+HTTP/1.0 200 OK
+Allow: GET, POST, HEAD, OPTIONS
+Content-Type: application/json
+Date: Thu, 16 Jul 2015 16:11:24 GMT
+Server: WSGIServer/0.1 Python/2.7.2
+Vary: Accept, Cookie
+X-Frame-Options: SAMEORIGIN
+
+{
+    "count": 7, 
+    "next": null, 
+    "previous": null, 
+    "results": [
+        {
+            "choices": [
+                {
+                    "choice_text": "Introduccion", 
+                    "id": 1, 
+                    "url": "http://127.0.0.1:8000/choices/1/.json", 
+                    "votes": 9
+                }, 
+                {
+                    "choice_text": "Django + Postgres", 
+                    "id": 2, 
+                    "url": "http://127.0.0.1:8000/choices/2/.json", 
+                    "votes": 0
+                }, 
+                {
+                    "choice_text": "Deployment en django", 
+                    "id": 3, 
+                    "url": "http://127.0.0.1:8000/choices/3/.json", 
+                    "votes": 0
+                }
+            ], 
+   </code></pre>
+
+				</section>
+
+				<section>
+				<section>
+					<h1>Permisos</h1>
+				</section>
+
+				<section>
+					<h2>Permisos de manera global</h2>
+						<pre><code data-trim contenteditable>
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticatedOrReadOnly',
+    ),
+}
+					   </code></pre>				
+				</section>
+
+				<section>
+					<h2>Permisos en la vista</h2>
+						<pre><code data-trim contenteditable>
+class QuestionViewSet(viewsets.ModelViewSet):
+    """
+    Viewset que proporciona listar, actualizar, borrar...
+    """
+    queryset = Question.objects.all()
+    serializer_class = QuestionModelSerializer
+    permission_classes = (permissions.IsAdminUser,)
+					   </code></pre>				
+				</section>
+				</section>
+
+				<section>
+					<h1>Throttling</h1>
+						<pre><code data-trim contenteditable>
+
+REST_FRAMEWORK = {
+    'DEFAULT_THROTTLE_CLASSES': (
+        'rest_framework.throttling.AnonRateThrottle',
+        'rest_framework.throttling.UserRateThrottle'
+    ),
+    'DEFAULT_THROTTLE_RATES': {
+        'anon': '1000/day',
+        'user': '5000/day'
+    }
+}
+					   </code></pre>	
+	<p>Permite definir scope</p>			
+
+				</section>
+
+				<section>
+					<h1>Preguntas?</h1>
+				</section>
+
+
+			</div>
+
+		</div>
+
+		<script src="reveal/lib/js/head.min.js"></script>
+		<script src="reveal/js/reveal.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+			    width: 1260,
+			    height: 700,
+
+				transition: 'fade', // none/fade/slide/convex/concave/zoom
+				transitionSpeed: 'fast',
+
+
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: 'reveal/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'reveal/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'reveal/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'reveal/plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'reveal/plugin/zoom-js/zoom.js', async: true },
+					{ src: 'reveal/plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
