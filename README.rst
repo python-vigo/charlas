@@ -36,6 +36,7 @@ Fecha                Título                                              Tipo  
 2016-12-15           `Pickle`_                                           relámpago           Clara Casas                          
 2016-09-17           `Eureka!`_                                          charla              Miguel (Peque)                       
 2016-04-21           `PyGotchas`_                                        charla              Xurxo Fresco                         
+2016-03-17           `Special methods for muggles`_                      charla              Alex Hermida                         
 2015-09-17           `Python + ZeroMQ`_                                  charla              Miguel (Peque)                       
 2015-07-16           `Django REST Framework`_                            charla              Fabio Souto                          
 ==================== =================================================== =================== =====================================
@@ -56,5 +57,6 @@ Fecha                Título                                              Tipo  
 .. _`Pickle`: 2016-12-15%20-%20Pickle%20%5Brel%C3%A1mpago%5D%20-%20Clara%20Casas
 .. _`Eureka!`: 2016-09-17%20-%20Eureka%21%20%5Bcharla%5D%20-%20Miguel%20%28Peque%29
 .. _`PyGotchas`: 2016-04-21%20-%20PyGotchas%20%5Bcharla%5D%20-%20Xurxo%20Fresco
+.. _`Special methods for muggles`: 2016-03-17%20-%20Special%20methods%20for%20muggles%20%5Bcharla%5D%20-%20Alex%20Hermida
 .. _`Python + ZeroMQ`: 2015-09-17%20-%20Python%20%2B%20ZeroMQ%20%5Bcharla%5D%20-%20Miguel%20%28Peque%29
 .. _`Django REST Framework`: 2015-07-16%20-%20Django%20REST%20Framework%20%5Bcharla%5D%20-%20Fabio%20Souto
