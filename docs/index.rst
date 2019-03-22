@@ -2,6 +2,7 @@
 ==================== =================================================== =================== =====================================
 Fecha                Título                                              Tipo                Ponente                              
 ==================== =================================================== =================== =====================================
+2019-03-21           `Raspberry y GPIO con gpiozero`_                    charla              David Lorenzo
 2019-01-17           `La serpiente y el cerdito`_                        charla              Clara Casas, Miguel (Peque)          
 2019-01-17           `Gevent`_                                           relámpago           Manuel Cameselle                     
 2018-12-20           `PyBuses`_                                          relámpago           David Lorenzo                        
@@ -23,6 +24,7 @@ Fecha                Título                                              Tipo  
 2015-07-16           `Django REST Framework`_                            charla              Fabio Souto                          
 ==================== =================================================== =================== =====================================
 
+.. _`Raspberry y GPIO con gpiozero`: 2019-03-21%20-%20Raspberry%20y%20GPIO%20con%20gpiozero%20%5Bcharla%5D%20-%20David%20Lorenzo
 .. _`La serpiente y el cerdito`: 2019-01-17%20-%20La%20serpiente%20y%20el%20cerdito%20%5Bcharla%5D%20-%20Clara%20Casas%2C%20Miguel%20%28Peque%29
 .. _`Gevent`: 2019-01-17%20-%20Gevent%20%5Brel%C3%A1mpago%5D%20-%20Manuel%20Cameselle
 .. _`PyBuses`: 2018-12-20%20-%20PyBuses%20%5Brel%C3%A1mpago%5D%20-%20David%20Lorenzo
