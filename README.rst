@@ -20,7 +20,8 @@ Aquí abajo dejamos el índice de las charlas actualmente añadidas al repositor
 ==================== =================================================== =================== =====================================
 Fecha                Título                                              Tipo                Ponente                              
 ==================== =================================================== =================== =====================================
-2019-03-21           `Raspberry y GPIO con gpiozero`_                    charla              David Lorenzo
+2019-04-25           `Scrapy y todas sus bondades!`_                     charla              Adrián Chaves                        
+2019-03-21           `Raspberry y GPIO con gpiozero`_                    charla              David Lorenzo                        
 2019-01-17           `La serpiente y el cerdito`_                        charla              Clara Casas, Miguel (Peque)          
 2019-01-17           `Gevent`_                                           relámpago           Manuel Cameselle                     
 2018-12-20           `PyBuses`_                                          relámpago           David Lorenzo                        
@@ -42,6 +43,7 @@ Fecha                Título                                              Tipo  
 2015-07-16           `Django REST Framework`_                            charla              Fabio Souto                          
 ==================== =================================================== =================== =====================================
 
+.. _`Scrapy y todas sus bondades!`: 2019-04-25%20-%20Scrapy%20y%20todas%20sus%20bondades%21%20%5Bcharla%5D%20-%20Adri%C3%A1n%20Chaves
 .. _`Raspberry y GPIO con gpiozero`: 2019-03-21%20-%20Raspberry%20y%20GPIO%20con%20gpiozero%20%5Bcharla%5D%20-%20David%20Lorenzo
 .. _`La serpiente y el cerdito`: 2019-01-17%20-%20La%20serpiente%20y%20el%20cerdito%20%5Bcharla%5D%20-%20Clara%20Casas%2C%20Miguel%20%28Peque%29
 .. _`Gevent`: 2019-01-17%20-%20Gevent%20%5Brel%C3%A1mpago%5D%20-%20Manuel%20Cameselle
