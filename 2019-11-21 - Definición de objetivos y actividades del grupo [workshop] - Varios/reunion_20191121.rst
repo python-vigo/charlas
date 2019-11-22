@@ -1,0 +1,110 @@
+Reunión 21-11-2019
+==================
+
+En este documento resumimos lo hablado en la reunión de cara a la organización de las reuniones del grupo para los próximos meses.
+
+Objetivos
+---------
+
+¿Qué objetivos nos gustaría tener como grupo en los próximos meses?
+
+1. **Atraer gente con nivel bajo/medio de Python**:
+    - Estudiantes
+    - Programadores que quieren empezar con Python
+    - Etc
+
+B) **Tener también contenidos que sean más avanzados**:
+    - Tener parte de la reunión dedicada a nivel de introducción y parte a charlas de interés general sin ceñirnos a nivel básico.
+
+C) **Networking y conocer gente**
+
+Actividades que se debatieron
+-----------------------------
+
+Estas son las ideas de actividades sobre las que trabajamos en esta reunión. **Muchas de ellas no están en la propuesta de planificación** para las reuniones del grupo durante próximos 7 meses, pero **se dejan aquí a modo de referencia**.
+
+- Preparar material "secuencial" a modo de cursillo introductorio, para ir dando en meses sucesivos, por ejemplo a partir de enero, usando como punto de partida la charla de "Daniel Sánchez" de "Introducción a Python"
+    - Anunciarlo con tiempo en diversos sitios con potenciales interesados
+    - Revisarlo, ver si se puede complementar algo, aclarar algún punto, extenderlo, ...
+    - Añadir sección Django como referente web
+    - Definir secciones pensando en sesiones de 20-25 minutos
+
+- Preparar talleres introductorios:
+    - Taller de introducción "Ya sé Python, y ahora qué?" [Peque]
+    - Taller de introducción al testing
+    - Taller de "cacharreo" con Raspberry Pi, MicroPython o similar
+
+- Preparar charlas/debates transverales
+    - "Batalla de Frameworks": Debate defendiendo pros y comentando contras de varios frameworks con un objetivo común (como se hizo con Django vs otros frameworks web)
+    - "Batalla de IDEs": Debate defendiendo pros y comentando contrasde varios texto/IDEs utilizados
+
+- Lightnings de iniciación y/o recurrentes:
+    - "Comparto mi setup!" ¿Qué herramientas uso para trabajar? ¿Qué uso como shell? ¿Cuál es mi configuración de SO? [DEFINIR GUIÓN BASE O PREGUNTAS MÍNIMAS A RESPONDER]
+    - "¿Cómo es el mundo real en el puesto de trabajo"?
+    - "¿Cómo implementamos integración continua?"
+
+- Recuperar la sección "Debate abierto"?:
+    - Proponer temas de los que nos interese hablar o tengamos un interés por conocer otras opiniones
+    - Votar a mano alzada qué temas nos interesan y cuales no
+    - Debatir entre esos temas del más votado al menos, durante 5 minutos, prorrogables a otros 5 si el tema interesa al grupo.
+
+- Recopilar preguntas recurrentes o dudas típicas:
+    - Recogeríamos dudas o "pitfalls" frecuentes para desarrollarlas (o bien en plan "pregunta abierta" o bien preparando respuestas que después se comenten en las reuniones, etc).
+
+- Preparar actividades junto con otros grupos de VigoTech, para charlas, talleres, ...
+    - VigoBrain ha dejado de estar activo, así que seguramente habrá gente y público de ese grupo que pueda tener interés en temas de IA, etc. relacionados con Python. Se podrían tratar de captar para dar charlas o asistir a las reuniones ;)
+    - A Industriosa podría ser una fuente de colaboración interesante en caso de querer organizar algún taller de Python + cacharreo en general.
+
+Lo ideal sería que, al menos las charlas de iniciación o las actividades, se organizasen por al menos 2 personas, para tener flexibilidad a la hora de preparar y llevar a cabo la actividad. Por ejemplo, que cualquiera de las dos pueda dar la charla si el otro no puede asistir a la reunión programada, etc.
+
+
+Estructura de las reuniones propuestas a partir de ahora
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+* Pre-Reunión: 20-30 minutos antes de la reunión. "¡GRATIS! Trae tu portátil y te dejamos instalado y configurado Python y otras herramientas listas para trabajar!"
+
+* Ponencias (20-25min cada una):
+    * Track de introducción
+    * Charla
+
+* Lightning talks
+
+* Recopilación de preguntas y dudas de la gente para tener una sección tipo "FAQ" que en posteriores reuniones podremos usar para crear un "Debate abierto"
+
+**NOTA**: En el caso de que se programe un taller para la reunión mensual, la estructura será la que defina el propio taller.
+
+
+Estrategia de comunicación
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* Comunicar de forma explícita la apertura del grupo, gratis, todo el mundo puede venir, etc
+
+* Como mínimo, se harán las siguientes comunicaciones:
+    - **Mailing List**: Se publicará la convocatoria el primer lunes del mes y un recordatorio el lunes de la misma semana de la reunión
+    - **Web**: Se publicará la convocatoria el primer lunes del mes
+    - **Twitter**: Durante las 3 primeras semanas del mes, se harán 3 tuits semanales avisando de la reunión y contenidos
+    - **Telegram y Slack**: Se comunicará la convocatoria el primer lunes del mes y se hará un recordatorio el lunes de la misma semana de la reunión
+
+En cada comunicación de la mailing list y la web, se hará alusión a los contenidos de la reunión del mes siguiente, a modo de avanzadilla.
+
+
+Propuesta de planificación para las próximas reuniones
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+El track de iniciación define una serie de charlas de forma secuencial y es por esa razón que no se plantea que sufra cambios de profundidad.
+
+Las **charlas propiamente dichas, sí pueden sufrir cambios** en base a las sugerencias que se hagan llegar o si alguien se ofrece a dar o adoptar alguna de las ya propuestas.
+
+.. csv-table::
+
+   "**Fecha**", "**Track de iniciación**", "**Charla**"
+   "19 Diciembre", "[Install Party 19:30] Instalación y puesta a punto inicial de Python
+
+   [Charla] Crear entornos virtuales e instalar paquetes en Python", "Introducción a Ansible por Daniel Sánchez"
+   "16 Enero", "Introducción a Python 1ª parte", "Charla por Xabi Crespo. Título a definir"
+   "20 Febrero", "Introducción a Python 2ª parte", "Distribuir paquetes en Python"
+   "26 Marzo (19 es festivo)", "Introducción a desarrollo web con Django", "pytest+responses+etc"
+   "16 Abril", "Introducción a la creación de APIs con Django Rest Framework", "Generadores, decoradores, etc"
+   "21 Mayo", "Introducción al testing", "GraphQL con Python"
+   "18 Junio", "Introducción a notebooks de Jupyter", "Home assistant"
+
+
