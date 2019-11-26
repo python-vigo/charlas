@@ -100,7 +100,7 @@ Las **charlas propiamente dichas, sí pueden sufrir cambios** en base a las suge
    "19 Diciembre", "[Install Party 19:30] Instalación y puesta a punto inicial de Python
 
    [Charla] Crear entornos virtuales e instalar paquetes en Python", "Introducción a Ansible por Daniel Sánchez"
-   "16 Enero", "Introducción a Python 1ª parte", "Charla por Xabi Crespo. Título a definir"
+   "16 Enero", "Introducción a Python 1ª parte", "'Polaris: intelixencia artificial para satélites' por Xabi Crespo"
    "20 Febrero", "Introducción a Python 2ª parte", "Distribuir paquetes en Python"
    "26 Marzo (19 es festivo)", "Introducción a desarrollo web con Django", "pytest+responses+etc"
    "16 Abril", "Introducción a la creación de APIs con Django Rest Framework", "Generadores, decoradores, etc"
