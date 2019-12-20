@@ -1,0 +1,12 @@
+all:
+  hosts:
+    server_1:
+    server_2:
+    # ...
+    server_n:
+  vars:
+    una_variable: la misma para todos
+    # Trampas para simular los servidores :)
+    ansible_connection: local
+    ansible_host: 127.0.0.1
+    ansible_python_interpreter: /usr/bin/python

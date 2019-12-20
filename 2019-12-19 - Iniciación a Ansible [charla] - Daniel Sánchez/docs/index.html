@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Daniel Sánchez">
+  <meta name="dcterms.date" content="2019-12-19">
+  <title>Iniciación a Ansible</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="revealjs/css/reveal.css">
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="revealjs/css/theme/white.css" id="theme">
+<link rel="stylesheet" href="markdownrevealstyle/custom.css">
+  <!-- Printing and PDF exports -->
+  <script>
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? 'revealjs/css/print/pdf.css' : 'revealjs/css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script>
+  <!--[if lt IE 9]>
+  <script src="revealjs/lib/js/html5shiv.js"></script>
+  <![endif]-->
+
+<script src="//twemoji.maxcdn.com/2/twemoji.min.js?2.4"></script>
+<script>
+  function addEvent(element, eventName, fn) {
+    if (element.addEventListener)
+      element.addEventListener(eventName, fn, false);
+    else if (element.attachEvent)
+      element.attachEvent('on' + eventName, fn);
+  }
+
+  addEvent(window, 'load', function() {
+    twemoji.parse(document.body, {'folder': 'svg', 'ext': '.svg'});
+  });
+</script>
+
+</head>
+<body>
+  <div class="reveal">
+<div class="markdownreveal_footer">Fuentes: https://i.gal/iniciacionansible</div>
+    <div class="slides">
+
+<section data-background="markdownrevealstyle/background.svg" id="title-slide">
+  <h1 class="title">Iniciación a Ansible</h1>
+  <p class="author">Daniel Sánchez</p>
+  <p class="date">2019-12-19</p>
+</section>
+
+<section data-background="markdownrevealstyle/background.svg" id="section" class="slide level2">
+<h2><img data-src="./figures/logo.svg" style="height:5.0%" /></h2>
+<ul>
+<li><strong>Web</strong>: https://www.ansible.com/</li>
+<li><strong>Repositorio</strong>: https://github.com/ansible/ansible</li>
+<li><strong>Documentación</strong>: https://docs.ansible.com/ansible</li>
+<li><strong>AWX</strong> (Tower): https://github.com/ansible/awx</li>
+</ul>
+<aside class="notes">
+<ul>
+<li>Red Hat</li>
+<li>Libre</li>
+<li>Tower</li>
+</ul>
+</aside>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="devops" class="slide level2">
+<h2>Devops</h2>
+<p>Principios, CAMS:</p>
+<ul>
+<li>Culture</li>
+<li><strong>Automation</strong></li>
+<li>Measurement</li>
+<li>Sharing</li>
+</ul>
+<aside class="notes">
+<p>Contexto Principios Agile =&gt; Devops</p>
+</aside>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="configuración-como-código" class="slide level2">
+<h2>Configuración como código</h2>
+<p>Ventajas:</p>
+<div>
+<ul>
+<li class="fragment">Idempotente</li>
+<li class="fragment">Versionable</li>
+<li class="fragment">Testeable</li>
+</ul>
+</div>
+<aside class="notes">
+<ul>
+<li>Repetible</li>
+<li>git</li>
+<li>molecule</li>
+</ul>
+</aside>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="características" class="slide level2">
+<h2>Características</h2>
+<div>
+<ul>
+<li class="fragment">Legible: Secuencia de comandos básicos</li>
+<li class="fragment">Clientes sin agentes. Requisitos:
+<ul>
+<li class="fragment">Python &gt;= 2.6</li>
+<li class="fragment">Acceso SSH (preferiblemente clave pública)</li>
+</ul></li>
+<li class="fragment">Conexión ssh/winrm en paralelo</li>
+<li class="fragment">No necesita usuario root (permite la utilización de sudo)</li>
+<li class="fragment">Separa:
+<ul>
+<li class="fragment">Programación: Playbooks, roles</li>
+<li class="fragment">Parametrización: Inventario</li>
+</ul></li>
+</ul>
+</div>
+<aside class="notes">
+<p>docker chroot kubectl oc vmware_tools …</p>
+</aside>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="escrito-en-yaml" class="slide level2">
+<h2>Escrito en… <em>Yaml</em></h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode yaml"><code class="sourceCode yaml"><a class="sourceLine" id="cb1-1" title="1"><span class="ot">---</span></a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="fu">esto_es:</span><span class="at"> un diccionario</span></a>
+<a class="sourceLine" id="cb1-3" title="3"><span class="fu">clave:</span><span class="at"> valor</span></a>
+<a class="sourceLine" id="cb1-4" title="4"><span class="fu">diccionario_anidado:</span></a>
+<a class="sourceLine" id="cb1-5" title="5">  <span class="co"># El indentado define el anidamiento</span></a>
+<a class="sourceLine" id="cb1-6" title="6">  <span class="fu">numero:</span><span class="at"> </span><span class="dv">42</span></a>
+<a class="sourceLine" id="cb1-7" title="7">  <span class="fu">boolean:</span><span class="at"> </span><span class="ch">True</span></a>
+<a class="sourceLine" id="cb1-8" title="8">  <span class="fu">nulo:</span></a>
+<a class="sourceLine" id="cb1-9" title="9">  <span class="fu">string:</span><span class="at"> Una cadena de texto</span></a>
+<a class="sourceLine" id="cb1-10" title="10">  <span class="fu">lista:</span></a>
+<a class="sourceLine" id="cb1-11" title="11">    <span class="kw">-</span> Javascript es subconjunto de yaml</a>
+<a class="sourceLine" id="cb1-12" title="12">    <span class="kw">-</span> <span class="kw">[</span> <span class="st">&quot;lista anidada&quot;</span><span class="kw">,</span> <span class="st">&quot;estilo javascript&quot;</span> <span class="kw">]</span></a>
+<a class="sourceLine" id="cb1-13" title="13">    <span class="kw">-</span> <span class="st">&quot;Entrecomilla strings con simbolos del yaml. Ejemplo :{}[] &quot;</span></a>
+<a class="sourceLine" id="cb1-14" title="14"><span class="fu">&quot;sigue el diccionario&quot;:</span><span class="at"> Cuidado con las claves con espacios</span></a>
+<a class="sourceLine" id="cb1-15" title="15"><span class="fu">multilinea:</span> <span class="st">&gt;</span></a>
+<a class="sourceLine" id="cb1-16" title="16">  Mayor &gt; si queremos que esté todo en una</a>
+<a class="sourceLine" id="cb1-17" title="17">  línea o pipe | para conservar enters ...</a>
+<a class="sourceLine" id="cb1-18" title="18"><span class="fu">foo:</span><span class="at"> bar</span></a></code></pre></div>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="instalación" class="slide level2">
+<h2>Instalación</h2>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb2-1" title="1"><span class="ex">python</span> -m pip install --user --upgrade ansible</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb3-1" title="1"><span class="ex">dnf</span> install ansible</a>
+<a class="sourceLine" id="cb3-2" title="2"><span class="co"># apt install ansible</span></a></code></pre></div>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="inventario---hosts" class="slide level2">
+<h2>Inventario - Hosts</h2>
+<p>inventory.yml</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode yaml"><code class="sourceCode yaml"><a class="sourceLine" id="cb4-1" title="1"><span class="fu">all:</span></a>
+<a class="sourceLine" id="cb4-2" title="2">  <span class="fu">hosts:</span></a>
+<a class="sourceLine" id="cb4-3" title="3">    <span class="fu">server_1:</span></a>
+<a class="sourceLine" id="cb4-4" title="4">    <span class="fu">server_2:</span></a>
+<a class="sourceLine" id="cb4-5" title="5">    <span class="co"># ...</span></a>
+<a class="sourceLine" id="cb4-6" title="6">    <span class="fu">server_n:</span></a></code></pre></div>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="ejecución-simple" class="slide level2">
+<h2>Ejecución simple</h2>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb5-1" title="1"><span class="ex">ansible</span> -m ping -i inventory.yml all</a></code></pre></div>
+<p><a href="./figures/inventory_hosts_ping.svg">💻</a></p>
+<object data="./figures/inventory_hosts_ping.svg" type="image/svg+xml">
+😱 Oops, inaccesible la grabación de termtosvg 😕
+</object>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="inventario---variables" class="slide level2">
+<h2>Inventario - Variables</h2>
+<div class="sourceCode" id="cb6"><pre class="sourceCode yaml"><code class="sourceCode yaml"><a class="sourceLine" id="cb6-1" title="1"><span class="fu">all:</span></a>
+<a class="sourceLine" id="cb6-2" title="2">  <span class="fu">vars:</span></a>
+<a class="sourceLine" id="cb6-3" title="3">    <span class="fu">una_variable:</span><span class="at"> la misma para todos</span></a>
+<a class="sourceLine" id="cb6-4" title="4">  <span class="fu">hosts:</span></a>
+<a class="sourceLine" id="cb6-5" title="5">    <span class="fu">server_1:</span></a>
+<a class="sourceLine" id="cb6-6" title="6">    <span class="fu">server_2:</span></a>
+<a class="sourceLine" id="cb6-7" title="7">    <span class="co"># ...</span></a>
+<a class="sourceLine" id="cb6-8" title="8">    <span class="fu">server_n:</span></a></code></pre></div>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="playbook---variables" class="slide level2">
+<h2>Playbook - Variables</h2>
+<p>main.yml</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode yaml"><code class="sourceCode yaml"><a class="sourceLine" id="cb7-1" title="1"><span class="ot">---</span></a>
+<a class="sourceLine" id="cb7-2" title="2"><span class="kw">-</span> <span class="fu">hosts:</span><span class="at"> all</span></a>
+<a class="sourceLine" id="cb7-3" title="3">  <span class="fu">tasks:</span></a>
+<a class="sourceLine" id="cb7-4" title="4"></a>
+<a class="sourceLine" id="cb7-5" title="5">    <span class="kw">-</span> <span class="fu">name:</span><span class="at"> Imprime mensaje con variable</span></a>
+<a class="sourceLine" id="cb7-6" title="6">      <span class="fu">debug:</span></a>
+<a class="sourceLine" id="cb7-7" title="7">        <span class="fu">msg:</span><span class="at"> </span><span class="st">&quot;{{ una_variable | upper }}&quot;</span></a></code></pre></div>
+<aside class="notes">
+<p>Playbook Setup Filtros</p>
+</aside>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="ejecución-playbook" class="slide level2">
+<h2>Ejecución playbook</h2>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb8-1" title="1"><span class="ex">ansible-playbook</span> -i inventory.yml main.yml</a></code></pre></div>
+<p><a href="./figures/playbook_debug.svg">💻</a></p>
+<object data="./figures/playbook_debug.svg" type="image/svg+xml">
+😱 Oops, inaccesible la grabación de termtosvg 😕
+</object>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="inventario---grupos" class="slide level2">
+<h2>Inventario - Grupos</h2>
+<div class="sourceCode" id="cb9"><pre class="sourceCode yaml"><code class="sourceCode yaml"><a class="sourceLine" id="cb9-1" title="1"><span class="fu">all:</span></a>
+<a class="sourceLine" id="cb9-2" title="2">  <span class="fu">vars:</span></a>
+<a class="sourceLine" id="cb9-3" title="3">    <span class="fu">una_variable:</span><span class="at"> para todos</span></a>
+<a class="sourceLine" id="cb9-4" title="4">  <span class="fu">hosts:</span></a>
+<a class="sourceLine" id="cb9-5" title="5">    <span class="fu">localhost:</span></a>
+<a class="sourceLine" id="cb9-6" title="6">      <span class="fu">ansible_connection:</span><span class="at"> local</span></a>
+<a class="sourceLine" id="cb9-7" title="7">      <span class="fu">ansible_python_interpreter:</span><span class="at"> </span><span class="st">&quot;/usr/bin/env python&quot;</span></a>
+<a class="sourceLine" id="cb9-8" title="8">  <span class="fu">children:</span></a>
+<a class="sourceLine" id="cb9-9" title="9">    <span class="fu">raspis:</span></a>
+<a class="sourceLine" id="cb9-10" title="10">      <span class="fu">hosts:</span></a>
+<a class="sourceLine" id="cb9-11" title="11">        <span class="fu">raspberrypi_1:</span></a>
+<a class="sourceLine" id="cb9-12" title="12">          <span class="fu">ansible_host:</span><span class="at"> </span><span class="fl">192.168.0.25</span></a>
+<a class="sourceLine" id="cb9-13" title="13">          <span class="fu">ansible_python_interpreter:</span><span class="at"> /usr/bin/python</span></a>
+<a class="sourceLine" id="cb9-14" title="14">          <span class="fu">ansible_user:</span><span class="at"> pi</span></a></code></pre></div>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="módulo-setup" class="slide level2">
+<h2>Módulo Setup</h2>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb10-1" title="1"><span class="ex">script</span> raspberrypi_1_setup.log</a>
+<a class="sourceLine" id="cb10-2" title="2"><span class="ex">ansible</span> -m setup -i inventory.yml raspberrypi_1</a>
+<a class="sourceLine" id="cb10-3" title="3"><span class="bu">exit</span></a>
+<a class="sourceLine" id="cb10-4" title="4"><span class="fu">less</span> -R raspberrypi_1_setup.log</a></code></pre></div>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="módulo-setup-1" class="slide level2">
+<h2>Módulo Setup</h2>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb11-1" title="1"><span class="ex">ansible</span> -m setup -i inventory.yml raspberrypi_1</a></code></pre></div>
+<p><a href="./figures/setup_raspbery.svg">💻</a></p>
+<object data="./figures/setup_raspbery.svg" type="image/svg+xml">
+😱 Oops, inaccesible la grabación de termtosvg 😕
+</object>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="modulos" class="slide level2">
+<h2>Modulos</h2>
+<ul>
+<li>Cloud modules</li>
+<li>Clustering modules</li>
+<li>Commands modules</li>
+<li>Crypto modules</li>
+<li>Database modules</li>
+<li>Files modules</li>
+<li>Identity modules</li>
+<li>Inventory modules</li>
+<li>Messaging modules</li>
+<li>Monitoring modules</li>
+<li>Net Tools modules</li>
+<li>Network modules</li>
+<li>Notification modules</li>
+<li>Packaging modules</li>
+<li>Remote Management modules</li>
+<li>Source Control modules</li>
+<li>Storage modules</li>
+<li>System modules</li>
+<li>Utilities modules</li>
+<li>Web Infrastructure modules</li>
+<li>Windows modules</li>
+</ul>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="playbook---register" class="slide level2">
+<h2>Playbook - register</h2>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb12-1" title="1"><span class="ex">---</span></a>
+<a class="sourceLine" id="cb12-2" title="2"><span class="ex">-</span> hosts: raspberrypi_1</a>
+<a class="sourceLine" id="cb12-3" title="3">  <span class="ex">tasks</span>:</a>
+<a class="sourceLine" id="cb12-4" title="4"></a>
+<a class="sourceLine" id="cb12-5" title="5">    <span class="ex">-</span> name: Recupera hostname</a>
+<a class="sourceLine" id="cb12-6" title="6">      <span class="ex">shell</span>: hostname</a>
+<a class="sourceLine" id="cb12-7" title="7">      <span class="ex">register</span>: hostname_result</a>
+<a class="sourceLine" id="cb12-8" title="8">    <span class="ex">-</span> debug:</a>
+<a class="sourceLine" id="cb12-9" title="9">        <span class="ex">var</span>: hostname_result</a></code></pre></div>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="inventario---vault" class="slide level2">
+<h2>Inventario - vault</h2>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb13-1" title="1"><span class="ex">ansible-vault</span> encrypt_string --vault-id dev@prompt</a></code></pre></div>
+<pre><code>New vault password (dev):
+Confirm new vault password (dev):
+Reading plaintext input from stdin. (ctrl-d to end input)
+clave_secreta!vault |
+$ANSIBLE_VAULT;1.2;AES256;dev
+37376130313137353234396666333136656330343430313230323463633661336439663339613639
+3133306431383738316362373939343833326437336233320a636234303163313266656331393964
+32313433633064613632363533666435373038643137396265646361633932623862663864643636
+3764383262633564310a333166313437353337613430656461656136303338363234613131313730
+3530</code></pre>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="inventario---vault-1" class="slide level2">
+<h2>Inventario - vault</h2>
+<div class="sourceCode" id="cb15"><pre class="sourceCode yaml"><code class="sourceCode yaml"><a class="sourceLine" id="cb15-1" title="1"><span class="fu">all:</span></a>
+<a class="sourceLine" id="cb15-2" title="2">  <span class="fu">children:</span></a>
+<a class="sourceLine" id="cb15-3" title="3">    <span class="fu">raspis:</span></a>
+<a class="sourceLine" id="cb15-4" title="4">      <span class="fu">hosts:</span></a>
+<a class="sourceLine" id="cb15-5" title="5">        <span class="fu">raspberrypi_1:</span></a>
+<a class="sourceLine" id="cb15-6" title="6">          <span class="fu">ansible_host:</span><span class="at"> </span><span class="fl">192.168.0.25</span></a>
+<a class="sourceLine" id="cb15-7" title="7">          <span class="fu">ansible_python_interpreter:</span><span class="at"> /usr/bin/python</span></a>
+<a class="sourceLine" id="cb15-8" title="8">          <span class="fu">ansible_user:</span><span class="at"> pi</span></a>
+<a class="sourceLine" id="cb15-9" title="9">          <span class="fu">wifi_ssid:</span><span class="at"> casa</span></a>
+<a class="sourceLine" id="cb15-10" title="10"><span class="fu">          wifi_password:</span> <span class="at">!vault </span><span class="st">|</span></a>
+<a class="sourceLine" id="cb15-11" title="11">            $ANSIBLE_VAULT;1.2;AES256;dev</a>
+<a class="sourceLine" id="cb15-12" title="12">            37376130313137353234396666333136656330343430313230323463633661336439663339613639</a>
+<a class="sourceLine" id="cb15-13" title="13">            3133306431383738316362373939343833326437336233320a636234303163313266656331393964</a>
+<a class="sourceLine" id="cb15-14" title="14">            32313433633064613632363533666435373038643137396265646361633932623862663864643636</a>
+<a class="sourceLine" id="cb15-15" title="15">            3764383262633564310a333166313437353337613430656461656136303338363234613131313730</a>
+<a class="sourceLine" id="cb15-16" title="16">            3530</a></code></pre></div>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="playbook---vault" class="slide level2">
+<h2>Playbook - vault</h2>
+<div class="sourceCode" id="cb16"><pre class="sourceCode yaml"><code class="sourceCode yaml"><a class="sourceLine" id="cb16-1" title="1"><span class="ot">---</span></a>
+<a class="sourceLine" id="cb16-2" title="2"><span class="kw">-</span> <span class="fu">hosts:</span><span class="at"> raspberrypi_1</span></a>
+<a class="sourceLine" id="cb16-3" title="3">  <span class="fu">tasks:</span></a>
+<a class="sourceLine" id="cb16-4" title="4"></a>
+<a class="sourceLine" id="cb16-5" title="5">    <span class="kw">-</span> <span class="fu">name:</span><span class="at"> Configura wifi</span></a>
+<a class="sourceLine" id="cb16-6" title="6">      <span class="fu">template:</span></a>
+<a class="sourceLine" id="cb16-7" title="7">        <span class="fu">src:</span><span class="at"> wpa_supplicant.conf</span></a>
+<a class="sourceLine" id="cb16-8" title="8">        <span class="fu">dest:</span><span class="at"> /etc/wpa_supplicant/wpa_supplicant.conf</span></a>
+<a class="sourceLine" id="cb16-9" title="9">        <span class="fu">mode:</span><span class="at"> </span><span class="dv">0600</span></a>
+<a class="sourceLine" id="cb16-10" title="10">        <span class="fu">user:</span><span class="at"> root</span></a>
+<a class="sourceLine" id="cb16-11" title="11">        <span class="fu">group:</span><span class="at"> root</span></a></code></pre></div>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="template-file" class="slide level2">
+<h2>Template file</h2>
+<pre><code>ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+update_config=1
+country=ES
+
+network={
+  ssid=&quot;{{ wifi_ssid }}&quot;
+  psk=&quot;{{ wifi_password }}&quot;
+  key_mgmt=WPA-PSK
+}</code></pre>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="avanzado" class="slide level2">
+<h2>Avanzado</h2>
+<ul>
+<li>Roles</li>
+<li>Módulos</li>
+<li>Filtros</li>
+<li>Test (Molecule)</li>
+<li>…</li>
+</ul>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="credits" class="slide level2">
+<h2>Credits</h2>
+<ul>
+<li><strong>ansible</strong> <a href="https://pypi.org/project/ansible/">https://pypi.org/project/ansible/</a></li>
+<li><strong>termtosvg</strong> <a href="https://pypi.org/project/termtosvg/">https://pypi.org/project/termtosvg/</a> - capturing terminal log colors</li>
+<li><strong>markdownreveal</strong> <a href="https://pypi.org/project/markdownreveal/">https://pypi.org/project/markdownreveal/</a> - slides</li>
+<li>Ansible Logo <a href="https://commons.wikimedia.org/wiki/File:Ansible_logo.svg">https://commons.wikimedia.org/wiki/File:Ansible_logo.svg</a></li>
+<li><a href="https://daniel-at-github.github.io/charla_2019-12-19__Iniciacion_a_Ansible/">https://daniel-at-github.github.io/charla_2019-12-19__Iniciacion_a_Ansible/</a></li>
+</ul>
+</section>
+    </div>
+  </div>
+
+  <script src="revealjs/lib/js/head.min.js"></script>
+  <script src="revealjs/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        // Display controls in the bottom right corner
+        controls: true,
+        // Display a presentation progress bar
+        progress: true,
+        // Display the page number of the current slide
+        slideNumber: false,
+        // Push each slide change to the browser history
+        history: true,
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+        // Enable the slide overview mode
+        overview: true,
+        // Vertical centering of slides
+        center: true,
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+        // Transition style
+        transition: 'slide', // none/fade/slide/convex/concave/zoom
+        // Transition speed
+        transitionSpeed: 'default', // default/fast/slow
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: 'revealjs/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'revealjs/plugin/zoom-js/zoom.js', async: true },
+          { src: 'revealjs/plugin/notes/notes.js', async: true }
+        ]
+      });
+    </script>
+    </body>
+</html>

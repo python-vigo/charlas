@@ -1,0 +1,15 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+
+[packages]
+ansible = "*"
+markdownreveal = "==0.2.5"
+ansi2html = "*"
+termtosvg = "*"
+
+[requires]
+python_version = "3"
