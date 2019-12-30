@@ -2,6 +2,7 @@
 ==================== ========================================================= =================== =====================================
 Fecha                Título                                                    Tipo                Ponente                              
 ==================== ========================================================= =================== =====================================
+2019-12-19           `Iniciación a Ansible`_                                   charla              Daniel Sánchez                       
 2019-11-21           `Definición de objetivos y actividades del grupo`_        workshop            Varios                               
 2019-04-25           `Scrapy y todas sus bondades!`_                           charla              Adrián Chaves                        
 2019-04-25           `Jupyter notebook ansible-kernel`_                        lightning           Daniel Sánchez                       
@@ -27,6 +28,7 @@ Fecha                Título                                                    
 2015-07-16           `Django REST Framework`_                                  charla              Fabio Souto                          
 ==================== ========================================================= =================== =====================================
 
+.. _`Iniciación a Ansible`: 2019-12-19%20-%20Iniciaci%C3%B3n%20a%20Ansible%20%5Bcharla%5D%20-%20Daniel%20S%C3%A1nchez
 .. _`Definición de objetivos y actividades del grupo`: 2019-11-21%20-%20Definici%C3%B3n%20de%20objetivos%20y%20actividades%20del%20grupo%20%5Bworkshop%5D%20-%20Varios
 .. _`Scrapy y todas sus bondades!`: 2019-04-25%20-%20Scrapy%20y%20todas%20sus%20bondades%21%20%5Bcharla%5D%20-%20Adri%C3%A1n%20Chaves
 .. _`Jupyter notebook ansible-kernel`: 2019-04-25%20-%20Jupyter%20notebook%20ansible-kernel%20%5Blightning%5D%20-%20Daniel%20S%C3%A1nchez
