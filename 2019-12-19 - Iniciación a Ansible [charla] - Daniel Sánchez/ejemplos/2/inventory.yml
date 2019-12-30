@@ -1,0 +1,14 @@
+all:
+  vars:
+    una_variable: para todos
+  hosts:
+    localhost:
+      ansible_connection: local
+      ansible_python_interpreter: "/usr/bin/env python"
+  children:
+    raspis:
+      hosts:
+        raspberrypi_1:
+          ansible_host: 192.168.0.25
+          ansible_python_interpreter: /usr/bin/python
+          ansible_user: pi

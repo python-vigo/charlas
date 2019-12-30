@@ -1,0 +1,7 @@
+---
+- hosts: all
+  tasks:
+  
+    - name: Imprime mensaje con  variable
+      debug:
+        msg: "{{ una_variable | upper }}"
