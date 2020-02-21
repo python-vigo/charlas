@@ -1,10 +1,8 @@
-+---------------------------+-------------------------------------------------------------------------+
-| **Pontente**              | Miguel González                                                         |
-+---------------------------+-------------------------------------------------------------------------+
-| **Repositorio original**  | https://github.com/migonzalvar/talks/tree/master/2020-02-python-vigo    |
-+---------------------------+-------------------------------------------------------------------------+
-| **Anuncio Convocatoria**  | https://www.python-vigo.es/posts/reunion-del-grupo-el-20200220/         |
-+---------------------------+-------------------------------------------------------------------------+
+**Pontente**: Miguel González
+
+**Repositorio original**: https://github.com/migonzalvar/talks/tree/master/2020-02-python-vigo
+
+**Anuncio Convocatoria**: https://www.python-vigo.es/posts/reunion-del-grupo-el-20200220/
 
 ---
 title: Distribuir paquetes con Python
