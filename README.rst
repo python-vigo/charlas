@@ -20,7 +20,8 @@ Aquí abajo dejamos el índice de las charlas actualmente añadidas al repositor
 ==================== ========================================================= =================== =====================================
 Fecha                Título                                                    Tipo                Ponente                              
 ==================== ========================================================= =================== =====================================
-2022-04-21           `ndjson y jsonlines`_                                     relámpago           David Lorenzo                        
+2022-10-20           `2 anos con Python e Serverless`_                         charla              Héctor Canto
+2022-04-21           `ndjson y jsonlines`_                                     relámpago           David Lorenzo
 2022-03-24           `pyTest introductorio`_                                   charla              David Lorenzo                        
 2020-02-20           `Loguru+Context`_                                         relámpago           David Lorenzo                        
 2020-02-20           `Distribuir paquetes con Python`_                         charla              Miguel González                      
@@ -52,6 +53,7 @@ Fecha                Título                                                    
 2015-07-16           `Django REST Framework`_                                  charla              Fabio Souto                          
 ==================== ========================================================= =================== =====================================
 
+.. _`2 anos con Python e Serverless`: 2022-10-20%20-%202%20anos%20con%20python%20e%20serverless%20-%20Hector%20Canto
 .. _`ndjson y jsonlines`: 2022-04-21%20-%20ndjson%20y%20jsonlines%20%5Brel%C3%A1mpago%5D%20-%20David%20Lorenzo
 .. _`pyTest introductorio`: 2022-03-24%20-%20pyTest%20introductorio%20%5Bcharla%5D%20-%20David%20Lorenzo
 .. _`Loguru+Context`: 2020-02-20%20-%20Loguru%2BContext%20%5Brel%C3%A1mpago%5D%20-%20David%20Lorenzo
