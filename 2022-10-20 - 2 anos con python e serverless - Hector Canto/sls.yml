@@ -1,0 +1,29 @@
+  iam:
+    role:
+      statements:
+        # Logs CloudWatch
+        - Effect: 'Allow'
+          Action:
+            - 'logs:CreateLogGroup'
+            - 'logs:CreateLogStream'
+            - 'logs:PutLogEvents'
+          Resource:
+            - "*"
+
+functions:
+  worker_alpha:
+      handler: service.worker_entrypoint.worker_main
+      timeout: 60
+      memorySize: 512
+      batchSize: 5
+      events:
+        - sqs:
+            arn:aws:sqs:eu-central-1:2233445678:service1-task-alpha
+        - httpApi:
+          method: GET
+          path: /integration/endpoint_one/{identifier}
+          documentation: ${file(docs/functions.doc.yml):endpoints.endpoin_one}
+          authorizer:
+            name: integrations_api
+            scopes:
+              - integration:one
