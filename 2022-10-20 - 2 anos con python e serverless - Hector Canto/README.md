@@ -4,13 +4,15 @@ _Ou o que me gustaría ter sabido fai 2 anos_
 
 
 2 años con Python y Serverless
+
 _O lo que me gustaría haver sabido hace 2 años_
 
 2 years with Python and Serverless
+
 _Or Or what I would love to know 2 years ago_
 
 
-[Presentación en inglés](./2years_with_python_and_serverless.pdf)
+[Presentación en inglés](./2_years_with_python_and_serverless.pdf)
 
 
 ## Descripción
@@ -29,7 +31,7 @@ What I would love to know beforehand about AWS Lambda and Serverless
 
 [twitter/@hectorcanto_dev](https://twitter.com/hectorcanto_dev)
 
-[slideshare.net/HectorCanto](https://www.slideshare.net/HectorCanto)
+[slideshare.net/HectorCanto](https://www.slideshare.net/HectorCanto/2-years-with-python-and-serverless)
 
 [linkedin.com/in/hectorcanto](https://www.linkedin.com/in/hectorcanto)
 
