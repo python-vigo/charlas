@@ -2,7 +2,9 @@
 ==================== ========================================================= ======================================= =====================================
 Fecha                Título                                                    Tipo                                    Ponente                              
 ==================== ========================================================= ======================================= =====================================
-2022-10-20           `2 anos con python e serverles`_                          charla                                  Hector Canto
+2022-10-20           `Test factories with factory-boy and Faker`_              charla                                  Hector Canto
+2022-10-20           `Fast, Robust, Accurate Or how to love your tests...`_    charla                                  David Vilchez
+2022-10-20           `2 anos con python e serverless`_                         charla                                  Hector Canto
 2022-04-21           `ndjson y jsonlines`_                                     relámpago                               David Lorenzo                        
 2022-03-24           `pyTest introductorio`_                                   charla                                  David Lorenzo                        
 2020-02-20           `Loguru+Context`_                                         relámpago                               David Lorenzo                        
