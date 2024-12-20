@@ -17,43 +17,51 @@ Si ves que falta alguna, anímate a recopilar la información necesaria y hacer 
 
 Aquí abajo dejamos el índice de las charlas actualmente añadidas al repositorio:
 
-==================== ========================================================= =================== =====================================
-Fecha                Título                                                    Tipo                Ponente                              
-==================== ========================================================= =================== =====================================
-2022-10-20           `2 anos con Python e Serverless`_                         charla              Héctor Canto
-2022-04-21           `ndjson y jsonlines`_                                     relámpago           David Lorenzo
-2022-03-24           `pyTest introductorio`_                                   charla              David Lorenzo                        
-2020-02-20           `Loguru+Context`_                                         relámpago           David Lorenzo                        
-2020-02-20           `Distribuir paquetes con Python`_                         charla              Miguel González                      
-2020-01-16           `Polaris, intelixencia artificial para satélites`_        charla              Xabier Crespo                        
-2019-12-19           `Iniciación a Ansible`_                                   charla              Daniel Sánchez                       
-2019-11-21           `Definición de objetivos y actividades del grupo`_        workshop            Varios                               
-2019-07-18           `MQTT y Python`_                                          charla              David Lorenzo                        
-2019-04-25           `Scrapy y todas sus bondades!`_                           charla              Adrián Chaves                        
-2019-04-25           `Jupyter notebook ansible-kernel`_                        relámpago           Daniel Sánchez                       
-2019-03-21           `Raspberry y GPIO con gpiozero`_                          charla              David Lorenzo                        
-2019-01-17           `La serpiente y el cerdito`_                              charla              Clara Casas, Miguel (Peque)          
-2019-01-17           `Gevent`_                                                 relámpago           Manuel Cameselle                     
-2018-12-20           `PyBuses`_                                                relámpago           David Lorenzo                        
-2018-12-20           `MicroPython`_                                            charla              David Lorenzo                        
-2018-06-21           `Python tricks`_                                          charla              Pablo Vázquez                        
-2018-05-24           `Ahorrando recursos con generadores`_                     charla              Xurxo Fresco                         
-2018-04-19           `Contexto más allá de los ficheros`_                      relámpago           Pablo Vázquez                        
-2017-12-21           `Logueando en Python`_                                    charla              Pablo Vázquez                        
-2017-11-23           `La serpiente y el ratón`_                                charla              Clara Casas, Miguel (Peque)          
-2017-07-20           `Type Hinting básico`_                                    lightning           Xurxo Fresco                         
-2017-06-10           `Python para MacGyvers`_                                  charla              Clara Casas, Miguel (Peque)          
-2017-03-16           `Presentaciones simples con Markdownreveal`_              relámpago           Miguel (Peque)                       
-2017-02-16           `Soundphy`_                                               workshop            Clara Casas, Miguel (Peque)          
-2016-12-15           `Pickle`_                                                 relámpago           Clara Casas                          
-2016-09-17           `Eureka!`_                                                charla              Miguel (Peque)                       
-2016-04-21           `PyGotchas`_                                              charla              Xurxo Fresco                         
-2016-03-17           `Special methods for muggles`_                            charla              Alex Hermida                         
-2015-09-17           `Python + ZeroMQ`_                                        charla              Miguel (Peque)                       
-2015-07-16           `Django REST Framework`_                                  charla              Fabio Souto                          
-==================== ========================================================= =================== =====================================
+==================== ================================================================ =================== =====================================
+Fecha                Título                                                           Tipo                Ponente                              
+==================== ================================================================ =================== =====================================
+2024-12-19           `typst`_                                                         lightning           Daniel Sánchez                       
+2024-11-13           `gita`_                                                          lightning           Daniel Sánchez                       
+2023-12-21           `Test factories with factoryboy`_                                charla              Hector Canto                         
+2022-11-17           `Fast, Robust, Accurate Or how to love your tests again`_        charla              David Vílchez                        
+2022-10-20           `2 anos con python e serverless`_                                charla              Hector Canto                         
+2022-04-21           `ndjson y jsonlines`_                                            relámpago           David Lorenzo                        
+2022-03-24           `pyTest introductorio`_                                          charla              David Lorenzo                        
+2020-02-20           `Loguru+Context`_                                                relámpago           David Lorenzo                        
+2020-02-20           `Distribuir paquetes con Python`_                                charla              Miguel González                      
+2020-01-16           `Polaris, intelixencia artificial para satélites`_               charla              Xabier Crespo                        
+2019-12-19           `Iniciación a Ansible`_                                          charla              Daniel Sánchez                       
+2019-11-21           `Definición de objetivos y actividades del grupo`_               workshop            Varios                               
+2019-07-18           `MQTT y Python`_                                                 charla              David Lorenzo                        
+2019-04-25           `Scrapy y todas sus bondades!`_                                  charla              Adrián Chaves                        
+2019-04-25           `Jupyter notebook ansible-kernel`_                               relámpago           Daniel Sánchez                       
+2019-03-21           `Raspberry y GPIO con gpiozero`_                                 charla              David Lorenzo                        
+2019-01-17           `La serpiente y el cerdito`_                                     charla              Clara Casas, Miguel (Peque)          
+2019-01-17           `Gevent`_                                                        relámpago           Manuel Cameselle                     
+2018-12-20           `PyBuses`_                                                       relámpago           David Lorenzo                        
+2018-12-20           `MicroPython`_                                                   charla              David Lorenzo                        
+2018-06-21           `Python tricks`_                                                 charla              Pablo Vázquez                        
+2018-05-24           `Ahorrando recursos con generadores`_                            charla              Xurxo Fresco                         
+2018-04-19           `Contexto más allá de los ficheros`_                             relámpago           Pablo Vázquez                        
+2017-12-21           `Logueando en Python`_                                           charla              Pablo Vázquez                        
+2017-11-23           `La serpiente y el ratón`_                                       charla              Clara Casas, Miguel (Peque)          
+2017-07-20           `Type Hinting básico`_                                           lightning           Xurxo Fresco                         
+2017-06-10           `Python para MacGyvers`_                                         charla              Clara Casas, Miguel (Peque)          
+2017-03-16           `Presentaciones simples con Markdownreveal`_                     relámpago           Miguel (Peque)                       
+2017-02-16           `Soundphy`_                                                      workshop            Clara Casas, Miguel (Peque)          
+2016-12-15           `Pickle`_                                                        relámpago           Clara Casas                          
+2016-09-17           `Eureka!`_                                                       charla              Miguel (Peque)                       
+2016-04-21           `PyGotchas`_                                                     charla              Xurxo Fresco                         
+2016-03-17           `Special methods for muggles`_                                   charla              Alex Hermida                         
+2015-09-17           `Python + ZeroMQ`_                                               charla              Miguel (Peque)                       
+2015-07-16           `Django REST Framework`_                                         charla              Fabio Souto                          
+==================== ================================================================ =================== =====================================
 
-.. _`2 anos con Python e Serverless`: 2022-10-20%20-%202%20anos%20con%20python%20e%20serverless%20-%20Hector%20Canto
+.. _`typst`: 2024-12-19%20-%20typst%20%5Blightning%5D%20-%20Daniel%20S%C3%A1nchez
+.. _`gita`: 2024-11-13%20-%20gita%20%5Blightning%5D%20-%20Daniel%20S%C3%A1nchez
+.. _`Test factories with factoryboy`: 2023-12-21%20-%20Test%20factories%20with%20factoryboy%20%5Bcharla%5D%20-%20Hector%20Canto
+.. _`Fast, Robust, Accurate Or how to love your tests again`: 2022-11-17%20-%20Fast%2C%20Robust%2C%20Accurate%20Or%20how%20to%20love%20your%20tests%20again%20%5Bcharla%5D%20-%20David%20V%C3%ADlchez
+.. _`2 anos con python e serverless`: 2022-10-20%20-%202%20anos%20con%20python%20e%20serverless%20%5Bcharla%5D%20-%20Hector%20Canto
 .. _`ndjson y jsonlines`: 2022-04-21%20-%20ndjson%20y%20jsonlines%20%5Brel%C3%A1mpago%5D%20-%20David%20Lorenzo
 .. _`pyTest introductorio`: 2022-03-24%20-%20pyTest%20introductorio%20%5Bcharla%5D%20-%20David%20Lorenzo
 .. _`Loguru+Context`: 2020-02-20%20-%20Loguru%2BContext%20%5Brel%C3%A1mpago%5D%20-%20David%20Lorenzo
