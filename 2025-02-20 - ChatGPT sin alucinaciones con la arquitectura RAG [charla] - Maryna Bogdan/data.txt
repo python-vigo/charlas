@@ -1,0 +1,24 @@
+Employee Benefits Policy
+TechNova Inc. offers employees 15 paid vacation days per year. 
+Sick leave is separate and provides up to 10 paid sick days annually.
+Employees must submit leave requests through the HR portal at least two weeks in advance.
+
+Product Warranty Information
+TechNova Inc. provides a 2-year limited warranty on all electronic devices.
+Warranty covers manufacturing defects but does not include accidental damage.
+Customers can file warranty claims through our online portal or by visiting authorized service centers.
+
+IT & Security Policy
+Employees must use multi-factor authentication (MFA) to access company systems.
+Company Wi-Fi credentials are confidential. The guest Wi-Fi password is 'TechNovaGuest2024'.
+Employees must report any security breaches to IT support immediately.
+
+Customer Support Guidelines
+TechNova Inc. guarantees a 24-hour response time for all customer inquiries.
+Refunds are available within 30 days of purchase if the product is returned in its original condition.
+Technical support is available via live chat, email, and phone from 9 AM - 6 PM (Monday-Friday).
+
+Office Location & Work Policy
+TechNova Inc. headquarters is located at 123 Innovation Drive, Silicon Valley, CA.
+Office hours are from 9 AM to 5 PM, Monday to Friday.
+Employees have the option to work remotely twice a week, subject to manager approval.
