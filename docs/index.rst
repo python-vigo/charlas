@@ -2,10 +2,12 @@
 ==================== ================================================================ =================== =====================================
 Fecha                Título                                                           Tipo                Ponente                              
 ==================== ================================================================ =================== =====================================
+2025-02-20           `ChatGPT sin alucinaciones con la arquitectura RAG`_             charla              Maryna Bogdan                        
 2025-01-16           `Tinkering with CLI`_                                            charla              Daniel Sánchez                       
 2024-12-19           `typst`_                                                         lightning           Daniel Sánchez                       
 2024-11-13           `gita`_                                                          lightning           Daniel Sánchez                       
 2023-12-21           `Test factories with factoryboy`_                                charla              Hector Canto                         
+2023-11-16           `Aprendiendo un shell pythonico, xonsh, con anki`_               charla              Daniel Sánchez                       
 2022-12-15           `pre-commit`_                                                    relámpago           Daniel Sánchez                       
 2022-11-17           `Fast, Robust, Accurate Or how to love your tests again`_        charla              David Vílchez                        
 2022-10-20           `2 anos con python e serverless`_                                charla              Hector Canto                         
@@ -42,10 +44,12 @@ Fecha                Título                                                    
 2015-07-16           `Django REST Framework`_                                         charla              Fabio Souto                          
 ==================== ================================================================ =================== =====================================
 
+.. _`ChatGPT sin alucinaciones con la arquitectura RAG`: 2025-02-20%20-%20ChatGPT%20sin%20alucinaciones%20con%20la%20arquitectura%20RAG%20%5Bcharla%5D%20-%20Maryna%20Bogdan
 .. _`Tinkering with CLI`: 2025-01-16%20-%20Tinkering%20with%20CLI%20%5Bcharla%5D%20-%20Daniel%20S%C3%A1nchez
 .. _`typst`: 2024-12-19%20-%20typst%20%5Blightning%5D%20-%20Daniel%20S%C3%A1nchez
 .. _`gita`: 2024-11-13%20-%20gita%20%5Blightning%5D%20-%20Daniel%20S%C3%A1nchez
 .. _`Test factories with factoryboy`: 2023-12-21%20-%20Test%20factories%20with%20factoryboy%20%5Bcharla%5D%20-%20Hector%20Canto
+.. _`Aprendiendo un shell pythonico, xonsh, con anki`: 2023-11-16%20-%20Aprendiendo%20un%20shell%20pythonico%2C%20xonsh%2C%20con%20anki%20%5Bcharla%5D%20-%20Daniel%20S%C3%A1nchez
 .. _`pre-commit`: 2022-12-15%20-%20pre-commit%20%5Brel%C3%A1mpago%5D%20-%20Daniel%20S%C3%A1nchez
 .. _`Fast, Robust, Accurate Or how to love your tests again`: 2022-11-17%20-%20Fast%2C%20Robust%2C%20Accurate%20Or%20how%20to%20love%20your%20tests%20again%20%5Bcharla%5D%20-%20David%20V%C3%ADlchez
 .. _`2 anos con python e serverless`: 2022-10-20%20-%202%20anos%20con%20python%20e%20serverless%20%5Bcharla%5D%20-%20Hector%20Canto

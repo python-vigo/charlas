@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Daniel Sánchez">
+  <title>Aprendiendo un shell pythonico, xonsh, con anki</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^4//dist/reset.css">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^4//dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^4//dist/theme/black.css" id="theme">
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide">
+  <h1 class="title">Aprendiendo un shell pythonico, xonsh, con anki</h1>
+  <p class="author">Daniel Sánchez</p>
+  <p class="date">16 de Noviembre, 2023</p>
+</section>
+
+<section id="quién-soy-yo" class="title-slide slide level1">
+<h1>¿Quién soy yo?</h1>
+<ul>
+<li>🧔🏻 Daniel Sánchez</li>
+<li>Integrante de Python Vigo</li>
+<li>Administrador de sistemas</li>
+<li>pyvideo.org, pycon-es 2024</li>
+</ul>
+</section>
+
+<section>
+<section id="introducción" class="title-slide slide level1">
+<h1>Introducción</h1>
+<ul>
+<li><strong>Anki</strong>: Aplicación de estudio basada en tarjetas
+<ul>
+<li><a href="https://apps.ankiweb.net/">https://apps.ankiweb.net/</a></li>
+</ul></li>
+<li><strong>Xonsh</strong>: Lenguaje de shell basado en Python
+<ul>
+<li><a href="https://xon.sh">https://xon.sh</a></li>
+</ul></li>
+</ul>
+</section>
+<section id="causa-de-la-charla" class="slide level2">
+<h2>Causa de la charla</h2>
+<ul>
+<li>Buscar herramientas (libres) de estudio para mi hija (tablet/chromebook)</li>
+<li>Anki como aplicación para estudiar</li>
+<li>Tomar de mi propia medicina con algo que quería aprender: Xonsh</li>
+</ul>
+</section>
+<section id="porqué-en-python-vigo" class="slide level2">
+<h2>Porqué en Python Vigo</h2>
+<ul>
+<li>Xonsh: Python en el shell</li>
+<li>Anki: Somos “knowledge workers”</li>
+</ul>
+</section></section>
+<section>
+<section id="anki" class="title-slide slide level1">
+<h1>Anki</h1>
+<ul>
+<li>Tarjetas con pregunta/respuesta</li>
+<li>Repetición espaciada: <a href="https://ncase.me/remember">https://ncase.me/remember</a></li>
+</ul>
+</section>
+<section id="repetición-espaciada" class="slide level2">
+<h2>Repetición espaciada</h2>
+<ul>
+<li>Se basa en la <code>curva del olvido</code> propuesta por <code>Hermann Ebbinghaus</code>(1885).</li>
+<li>Consiste en repasar en intervalos espaciados para maximizar <span class="math inline">\(memorización/esfuerzo\)</span>.</li>
+<li>Intervalos cada vez más largos para reducir tiempo de estudio y aumentar retención a largo plazo.</li>
+<li>La tarjeta que olvidas vuelve al intervalo más corto.</li>
+</ul>
+</section>
+<section id="anki---aplicación" class="slide level2">
+<h2>Anki - Aplicación</h2>
+<ul>
+<li>Multiplataforma</li>
+<li>Las tarjetas se agrupan en mazos (grupos, subgrupos, …)</li>
+<li>Puedes exportarlos a fichero o a la web de Anki</li>
+</ul>
+</section>
+<section id="creación-de-tarjetas---fichero" class="slide level2">
+<h2>Creación de tarjetas - Fichero</h2>
+<p><code>~/ejemplo.md</code></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># IT::Xonsh</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">## Crear una variable de entorno en xonsh</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="kw">`</span><span class="va">$X</span> = 1<span class="kw">`</span></span></code></pre></div>
+</section>
+<section id="creación-de-tarjetas---.apkg" class="slide level2">
+<h2>Creación de tarjetas - *.apkg</h2>
+<div class="sourceCode" id="cb2"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install markdown-anki-decks</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> input/ output/</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> ~/ejemplo.md input/ejemplo.md</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="ex">mdankideck</span> input/ output/ <span class="co"># Crea output/ejemplo.apkg</span></span></code></pre></div>
+<p><code>ejemplo.apkg</code> es el mazo de tarjetas (deck) a cargar en anki</p>
+</section>
+<section id="muestra-de-tarjeta" class="slide level2">
+<h2>Muestra de tarjeta</h2>
+<figure>
+<img data-src="media/anki.jpg" alt="Imagen de tarjeta de Anki" /><figcaption aria-hidden="true">Imagen de tarjeta de Anki</figcaption>
+</figure>
+</section>
+<section id="markdown-anki-decks" class="slide level2">
+<h2>markdown-anki-decks</h2>
+<ul>
+<li>Pros
+<ul>
+<li>Sencillo y efectivo</li>
+<li>Soporta imagen y sonido (importante para estudiar idiomas)</li>
+</ul></li>
+<li>Contras
+<ul>
+<li>Modificar equivale a crear una pregunta distinta</li>
+<li>El mantenedor creó una startup y ya no responde</li>
+</ul></li>
+</ul>
+</section>
+<section id="consejos-para-crear-tarjetas" class="slide level2">
+<h2>Consejos para crear tarjetas</h2>
+<ul>
+<li>Tu yo futuro no ha de decir: 🚽🪠💩💥🤬
+<ul>
+<li>¿Que me pregunta?</li>
+<li>Se cosas de la pregunta ¿Porqué no me dice en concreto lo que quiere?</li>
+<li>No me dice ni cuantas ni cuales. Pense tres apartados, pero eran 4.</li>
+</ul></li>
+<li>La pregunta ha de guiar a una respuesta concreta</li>
+</ul>
+</section>
+<section id="nunca-apetece-estudiar" class="slide level2">
+<h2>Nunca apetece estudiar</h2>
+<ul>
+<li>Adaptarlo a tu propia experienecia (Iterar)
+<ul>
+<li>Preparar las preguntas ya es aprender</li>
+<li>Ver cuantas preguntas al día</li>
+<li>Podar o reescribir lo que no convenza o ya no haga falta</li>
+<li>Compartimentar en submódulos</li>
+</ul></li>
+</ul>
+</section></section>
+<section>
+<section id="xonsh" class="title-slide slide level1">
+<h1>Xonsh</h1>
+<ul>
+<li>Shell script mezcla de python y bash</li>
+<li>No poner como default shell del usuario, sino del terminal.</li>
+</ul>
+</section>
+<section id="pros" class="slide level2">
+<h2>Pros</h2>
+<ul>
+<li>Python</li>
+<li>Prompt: Historial, Syntax highlighting, Tab completion</li>
+<li>Globs: Clásico, python (**), regexp (``)</li>
+<li>Cross-platform, …</li>
+</ul>
+</section>
+<section id="contras" class="slide level2">
+<h2>Contras</h2>
+<ul>
+<li>Utiliza más recursos que bash (180M vs 5M)</li>
+<li>No es posix compliant</li>
+<li>Añade sintaxis que no es ni bash ni python</li>
+</ul>
+</section>
+<section id="instalación" class="slide level2">
+<h2>Instalación</h2>
+<div class="sourceCode" id="cb3"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> <span class="at">-m</span> ensurepip <span class="at">--upgrade</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> <span class="at">-m</span> pip install <span class="at">--upgrade</span> pip pipx</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="ex">pipx</span> install <span class="st">&quot;xonsh[full]&quot;</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Si solo quieres probar:</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="ex">podman</span> run <span class="at">-it</span> <span class="at">--rm</span> docker.io/xonsh/interactive</span></code></pre></div>
+<p>xfce4-terminal → (Menú) Editar → Preferencias → General → Orden personalizada</p>
+</section>
+<section id="modo-subproceso" class="slide level2">
+<h2>Modo subproceso</h2>
+<div class="sourceCode" id="cb4"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span></span></code></pre></div>
+<pre><code>foo bar baz</code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> /proc/ <span class="kw">|</span> <span class="fu">grep</span> b <span class="kw">|</span> <span class="fu">tr</span> <span class="st">&#39;\n&#39;</span> <span class="st">&#39; &#39;</span></span></code></pre></div>
+<pre><code>bootconfig buddyinfo bus dynamic_debug fb slabinfo</code></pre>
+</section>
+<section id="modo-python" class="slide level2">
+<h2>Modo python</h2>
+<div class="sourceCode" id="cb8"><pre class="sourceCode py"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span><span class="op">**</span><span class="dv">12345</span></span></code></pre></div>
+<pre><code>16417101068825821635602074166390650141012723553073588127211610308792509417139014
+42801590345364394577348704191271404016671955103310856571853327210892364011930444
+93457116299768844344303479235489462436380672117015123283299131391904179287678259
+17330853673876198113995865488085223490844833881728901416677416986925133937982859
+97484929187754378647390322177780513338829900741162462812693649337248923421345047
+02491040016637557429810893780765197418589477584716543480995722533317862352141459
+21778131626621118648615701926208041407767026464273601842699811352344573268085614
+43298769722733007033925849977292071979710839457003454940924001471869973070120694
+54068489589035676979448169848060836924945824197706493306108258511936030341393221
+58642352326445244940378199335242188509466405227079552763272189612142481317352247
+46743958861550922034040367307484747817107157454461354680981398318240832596479191
+75273503681561172684624283384438504776503000432241604550454374116320822227191911
+32212348408506392635060634219714640784117802807114719253394251727055351398814292
+59760907696954562211596990525835330113316520793470930981730869754835392744640233
+57456484465482927479569437320368592222760278170306076733438801098370797675711274
+67105497071144215893056168434313577411874159450670283314739675882501585004298334
+36903451859959562351438257716205435460306645626478546564313026445741198738202155
+95718618624485232422006575550007068883734241454686368856734496265385908809403972
+49468513774112286689671967805393728581840975167032014050184303922404073587009688
+95962734191063891036620953189379906259801367119882374219623152666868560895059814
+38440850638067589321141759499017023839596858455548192000140085142294166987063499
+02479268133484315979093632135191985975866956920054150761209978090970519890217602
+62198722017154220960903436862729843514415945695067780410626632667993427938563138
+01540959815845788584759033248828248561586450271172777240971795656082001848115815
+26093052166316748017388606401911857277828151673515777955588816778706443255859541
+08439874464978816662884232331700604130259246299504773033421801493989260736185827
+15358742250388958231281694757980523791263699450732952325727664209947786063982561
+77532763850451691857010131939169841238860760374248441474826838966912911802687896
+97357822868411168426564105746476075244189007203280453779933862798087689903762894
+24757351052369393977137871998119168898493037938756635621557623138404459266598837
+78422932579983878202606048149686556175703183900225709180287694924839274417566911
+22420884398832483363105970012573859807769615293511988777471935310549568818083321
+77946751404038228718567911769630971553915410012677600002457982207465176670752102
+11700277398054808969653097247643969459988128181297321726585388472790653547974585
+40853388511051445854819941562064974367458999448777325314125412790143003245948906
+23941145509856940982863769834430048120562966797907114102689879364945689860493474
+95453842236771950788251316605100735299406831925145066667664836820056432938299875
+88757604142596540049772613099882673198063548560517845539909366106347333759841590
+28722378614984450255386315585631994503350002142910493190254825610707400589976364
+98574846795513107797164188267289585457123636828281133622076917478472011333126908
+47465242041242634750541128416309335861661950361156964696860756004804205635575676
+16835633252622327172811002146392754445051182169805284630259703542633955126179520
+11305962991422983368853592572967677802840689731610610103846911909098456715259196
+23654150396463945915038307976263392469860570777586114136649141687453752667862981
+41171496573941614387744125843685677063619782918759823106021054037757857761587472
+24083504058044736054402906493041256994316972923810216231221868793020306805540027
+5795180972382856696655279408212344832</code></pre>
+</section>
+<section id="modo-python-1" class="slide level2">
+<h2>Modo python</h2>
+<div class="sourceCode" id="cb10"><pre class="sourceCode py"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>sys.version</span></code></pre></div>
+<pre><code>&#39;3.12.0 (main, Oct  2 2023, 00:00:00) [GCC 13.2.1 20230918 (Red Hat 13.2.1-3)]&#39;</code></pre>
+</section>
+<section id="modo-python-2" class="slide level2">
+<h2>Modo python</h2>
+<p>(En Xonsh) Python siempre gana :)</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode py"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>ls, l <span class="op">=</span> <span class="dv">68</span>,<span class="dv">26</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>ls <span class="op">-</span>l</span></code></pre></div>
+<pre><code>42</code></pre>
+<div class="sourceCode" id="cb14"><pre class="sourceCode py"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">del</span> ls, l</span></code></pre></div>
+</section>
+<section id="variables-de-entorno-modo-subproceso" class="slide level2">
+<h2>Variables de entorno (modo subproceso)</h2>
+<div class="sourceCode" id="cb15"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="va">$HOME</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Específico de Xonsh</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="ex">expresion_python</span> = <span class="st">&quot;HOME&quot;</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="va">${expresion_python}</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="va">${</span><span class="er">...</span><span class="va">}</span></span></code></pre></div>
+</section>
+<section id="truco.-pedir-clave-y-que-solo-sea-accesible-en-un-bloque-with" class="slide level2">
+<h2>Truco. Pedir clave y que solo sea accesible en un bloque with</h2>
+<div class="sourceCode" id="cb16"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="ex">import</span> getpass</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="ex">with</span> <span class="va">${</span><span class="er">...</span><span class="va">}</span>.swap<span class="er">(</span><span class="va">PASS</span><span class="op">=</span>getpass.getpass<span class="kw">())</span><span class="bu">:</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span> <span class="va">$PASS</span></span></code></pre></div>
+</section>
+<section id="usando-shell-dentro-de-python" class="slide level2">
+<h2>Usando shell dentro de python</h2>
+<div class="sourceCode" id="cb17"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="va">$(</span><span class="ex">comando</span><span class="va">)</span> <span class="kw">;</span> <span class="ex">!</span><span class="er">(</span><span class="ex">comando</span><span class="kw">)</span> <span class="co"># Capturando stdout</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$[comando]</span> <span class="kw">;</span> <span class="ex">![comando]</span> <span class="co"># Sin capturar stdout</span></span></code></pre></div>
+</section>
+<section id="usando-python-dentro-de-shell" class="slide level2">
+<h2>Usando python dentro de shell</h2>
+<div class="sourceCode" id="cb18"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="va">${expresion_python}</span> <span class="co"># Stdout como nombre de variable</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="ex">@</span><span class="er">(</span><span class="ex">expresion_python</span><span class="kw">)</span> <span class="co"># La salida se usa como un token o una lista de tokens</span></span></code></pre></div>
+</section>
+<section id="usando-shell-dentro-de-shell-pasando-por-python" class="slide level2">
+<h2>Usando shell dentro de shell, pasando por python</h2>
+<div class="sourceCode" id="cb19"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="ex">@</span><span class="va">$(</span><span class="ex">comando</span><span class="va">)</span> <span class="co"># La salida del comando da otro comando, que es ejecutado</span></span></code></pre></div>
+</section>
+<section id="ejemplo" class="slide level2">
+<h2>Ejemplo</h2>
+<div class="sourceCode" id="cb20"><pre class="sourceCode py"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> x <span class="kw">in</span> <span class="bu">list</span>(<span class="bu">set</span>($(man bash).split()))[:<span class="dv">300</span>]:</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> x.isalnum():</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>        touch <span class="op">@</span>(x)</span></code></pre></div>
+</section>
+<section id="anidando-subprocesos" class="slide level2">
+<h2>Anidando subprocesos</h2>
+<div class="sourceCode" id="cb21"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="pp">@(</span><span class="st">&quot;file.&quot;</span> + <span class="va">$(</span><span class="fu">date</span> <span class="at">-I</span><span class="va">)</span>.strip(<span class="pp">)</span> + <span class="st">&quot;.bak&quot;</span><span class="er">)</span></span></code></pre></div>
+</section>
+<section id="strings-avanzados" class="slide level2">
+<h2>Strings avanzados</h2>
+<table>
+<thead>
+<tr class="header">
+<th>Nativo</th>
+<th>Icono</th>
+<th>Transformación</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>🐍</td>
+<td>\</td>
+<td>Backslash escapes</td>
+</tr>
+<tr class="even">
+<td>🐍</td>
+<td>🔄 {}</td>
+<td>Sustituye expresiones entre {}</td>
+</tr>
+<tr class="odd">
+<td>🐚</td>
+<td>🔄 $VAR</td>
+<td>Sustituye $VAR en modo subproceso</td>
+</tr>
+<tr class="even">
+<td>🐚</td>
+<td>/</td>
+<td>Devuelve un pathlib.Path</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="strings-avanzados-1" class="slide level2">
+<h2>Strings avanzados</h2>
+<table>
+<thead>
+<tr class="header">
+<th>String</th>
+<th>Tipo</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>""</code></td>
+<td>🐍regular string</td>
+</tr>
+<tr class="even">
+<td><code>r""</code></td>
+<td>🐍raw string</td>
+</tr>
+<tr class="odd">
+<td><code>f""</code></td>
+<td>🐍formatted string</td>
+</tr>
+<tr class="even">
+<td><code>fr""</code></td>
+<td>🐚raw formatted string</td>
+</tr>
+<tr class="odd">
+<td><code>p""</code></td>
+<td>🐚path string</td>
+</tr>
+<tr class="even">
+<td><code>pr""</code></td>
+<td>🐚raw Path string</td>
+</tr>
+<tr class="odd">
+<td><code>pf""</code></td>
+<td>🐚formatted Path string</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="strings-avanzados-2" class="slide level2">
+<h2>Strings avanzados</h2>
+<table>
+<thead>
+<tr class="header">
+<th>String</th>
+<th>\</th>
+<th>🔄 $VAR</th>
+<th>🔄 {}</th>
+<th>/path</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>""</code></td>
+<td>✅</td>
+<td>✅</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr class="even">
+<td><code>r""</code></td>
+<td>❌Ⓡ</td>
+<td>❌Ⓡ</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr class="odd">
+<td><code>f""</code></td>
+<td>✅</td>
+<td>✅</td>
+<td>✅Ⓕ</td>
+<td>❌</td>
+</tr>
+<tr class="even">
+<td><code>fr""</code></td>
+<td>❌Ⓡ</td>
+<td>❌Ⓡ</td>
+<td>✅Ⓕ</td>
+<td>❌</td>
+</tr>
+<tr class="odd">
+<td><code>p""</code></td>
+<td>✅</td>
+<td>✅Ⓟ</td>
+<td>❌</td>
+<td>✅Ⓟ</td>
+</tr>
+<tr class="even">
+<td><code>pr""</code></td>
+<td>❌Ⓡ</td>
+<td>✅Ⓟ</td>
+<td>❌</td>
+<td>✅Ⓟ</td>
+</tr>
+<tr class="odd">
+<td><code>pf""</code></td>
+<td>✅</td>
+<td>✅Ⓟ</td>
+<td>✅Ⓕ</td>
+<td>✅Ⓟ</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="globs" class="slide level2">
+<h2>Globs</h2>
+<table>
+<thead>
+<tr class="header">
+<th>Representación</th>
+<th>Tipo de glob</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>*</code></td>
+<td>Shell glob</td>
+</tr>
+<tr class="even">
+<td><code>**</code></td>
+<td>Python glob</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="globs-1" class="slide level2">
+<h2>Globs</h2>
+<table>
+<thead>
+<tr class="header">
+<th>Representación</th>
+<th>Tipo de glob</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>``</code></td>
+<td>Regexp glob</td>
+</tr>
+<tr class="even">
+<td><code>f``</code></td>
+<td>Formatted regexp glob</td>
+</tr>
+<tr class="odd">
+<td><code>p``</code></td>
+<td>Path regexp glob</td>
+</tr>
+<tr class="even">
+<td><code>g``</code></td>
+<td>Shell glob</td>
+</tr>
+<tr class="odd">
+<td><code>fg``</code></td>
+<td>Formatted shell glob</td>
+</tr>
+<tr class="even">
+<td><code>pg``</code></td>
+<td>Path shell glob</td>
+</tr>
+<tr class="odd">
+<td><code>@&lt;func_name&gt;`test`</code></td>
+<td>Custom glob</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="help" class="slide level2">
+<h2>Help → ?</h2>
+<p>Ayuda de objetos y métodos de python</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;&quot;</span><span class="ex">.join</span> <span class="pp">?</span> <span class="co"># Muestra help(join)</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="va">aliases</span><span class="op">[</span><span class="st">&#39;showcmd&#39;</span><span class="op">]</span> <span class="ex">??</span> <span class="co"># Muestra ayuda y fuente</span></span></code></pre></div>
+</section>
+<section id="aliases" class="slide level2">
+<h2>aliases</h2>
+<div class="sourceCode" id="cb23"><pre class="sourceCode py"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>aliases[<span class="st">&#39;piu&#39;</span>] <span class="op">=</span> <span class="st">&#39;pip install -U @($args)&#39;</span></span></code></pre></div>
+</section></section>
+<section id="bill-of-materials" class="title-slide slide level1">
+<h1>Bill of materials</h1>
+<ul>
+<li>Pandoc:</li>
+</ul>
+<div class="sourceCode" id="cb24"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pandoc</span> <span class="at">--standalone</span> <span class="at">--mathjax</span> <span class="at">--slide-level</span> 2 <span class="at">--write</span><span class="op">=</span>revealjs <span class="dt">\</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  charla.md <span class="at">--output</span><span class="op">=</span>charla.html</span></code></pre></div>
+<ul>
+<li>Reveal.js</li>
+<li>Xonsh</li>
+<li>Anki</li>
+<li>markdown-anki-decks</li>
+<li>fedora kinoite</li>
+</ul>
+</section>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/reveal.js@^4//dist/reveal.js"></script>
+
+  <!-- reveal.js plugins -->
+  <script src="https://unpkg.com/reveal.js@^4//plugin/notes/notes.js"></script>
+  <script src="https://unpkg.com/reveal.js@^4//plugin/search/search.js"></script>
+  <script src="https://unpkg.com/reveal.js@^4//plugin/zoom/zoom.js"></script>
+  <script src="https://unpkg.com/reveal.js@^4//plugin/math/math.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+        // Display controls in the bottom right corner
+        controls: true,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: true,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'bottom-right',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: false,
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: false,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: false,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: true,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'default',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: true,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'slide',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'fade',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        math: {
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    </body>
+</html>
