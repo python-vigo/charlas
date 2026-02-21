@@ -1,0 +1,21 @@
+/* counter.tcss */
+Container {
+    align: center middle;
+}
+
+#display {
+    content-align: center middle;
+    height: 5;
+    text-style: bold;
+    color: $accent;
+}
+
+.botones {
+    layout: horizontal;
+    align: center middle;
+}
+
+Button {
+    margin: 1 2;
+    min-width: 10;
+}
