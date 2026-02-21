@@ -1,0 +1,33 @@
+/* demo.tcss */
+Container {
+    align: center middle;
+    padding: 2;
+}
+
+.label {
+    text-style: bold;
+    color: $text-primary;
+    margin-bottom: 1;
+}
+
+Input {
+    width: 50%;
+    margin-bottom: 1;
+    border: tall $primary;
+}
+
+Button {
+    width: auto;
+    min-width: 20;
+    /* color: red;
+    background: white; */
+}
+
+#resultado {
+    margin-top: 2;
+    text-style: bold;
+    color: $success;
+    text-align: center;
+}
+
+/* ¡Sí! Variables de color como $primary, $success, etc. */

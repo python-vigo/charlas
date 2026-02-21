@@ -20,6 +20,10 @@ Aquí abajo dejamos el índice de las charlas actualmente añadidas al repositor
 ==================== ================================================================ =================== =====================================
 Fecha                Título                                                           Tipo                Ponente                              
 ==================== ================================================================ =================== =====================================
+2026-02-19           `x86-64-v3 Architectures`_                                       lightning           Rubén González                       
+2026-02-19           `textual`_                                                       lightning           Daniel Sánchez                       
+2026-02-19           `Charlas relacionadas con Python en la FOSDEM 2026`_             lightning           Jorge Muñoz                          
+2025-02-20           `ChatGPT sin alucinaciones con la arquitectura RAG`_             charla              Maryna Bogdan                        
 2025-01-16           `Tinkering with CLI`_                                            charla              Daniel Sánchez                       
 2024-12-19           `typst`_                                                         lightning           Daniel Sánchez                       
 2024-11-13           `gita`_                                                          lightning           Daniel Sánchez                       
@@ -60,6 +64,10 @@ Fecha                Título                                                    
 2015-07-16           `Django REST Framework`_                                         charla              Fabio Souto                          
 ==================== ================================================================ =================== =====================================
 
+.. _`x86-64-v3 Architectures`: 2026-02-19%20-%20x86-64-v3%20Architectures%20%5Blightning%5D%20-%20Rub%C3%A9n%20Gonz%C3%A1lez
+.. _`textual`: 2026-02-19%20-%20textual%20%5Blightning%5D%20-%20Daniel%20S%C3%A1nchez
+.. _`Charlas relacionadas con Python en la FOSDEM 2026`: 2026-02-19%20-%20Charlas%20relacionadas%20con%20Python%20en%20la%20FOSDEM%202026%20%5Blightning%5D%20-%20Jorge%20Mu%C3%B1oz
+.. _`ChatGPT sin alucinaciones con la arquitectura RAG`: 2025-02-20%20-%20ChatGPT%20sin%20alucinaciones%20con%20la%20arquitectura%20RAG%20%5Bcharla%5D%20-%20Maryna%20Bogdan
 .. _`Tinkering with CLI`: 2025-01-16%20-%20Tinkering%20with%20CLI%20%5Bcharla%5D%20-%20Daniel%20S%C3%A1nchez
 .. _`typst`: 2024-12-19%20-%20typst%20%5Blightning%5D%20-%20Daniel%20S%C3%A1nchez
 .. _`gita`: 2024-11-13%20-%20gita%20%5Blightning%5D%20-%20Daniel%20S%C3%A1nchez
