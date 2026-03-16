@@ -1,120 +1,88 @@
-#!/usr/bin/env python3
-import shutil
-from pathlib import Path
-from urllib.parse import quote
+import pathlib
+import re
+import typing
+from dataclasses import dataclass
 
+class TalkParseError(Exception):
+    """Exception raised when parsing a talk directory name fails."""
+    pass
 
-def build_index():
-    talks, max_talk_lengths, folder_names = get_talks_metadata()
+TALK_TYPE_ICONS = {
+    "lightning": "⚡",
+    "relámpago": "⚡",
+    "charla": "🗣️",
+    "talk": "🗣️",
+    "workshop": "🛠️",
+    "taller": "🛠️"
+}
 
-    # Add extra space to save space for hyperlinks syntax: ``_
-    max_talk_date_length = max_talk_lengths[0] + 10
-    max_talk_title_length = max_talk_lengths[1] + 10
-    max_talk_type_length = max_talk_lengths[2] + 10
-    max_talk_speaker_length = max_talk_lengths[3] + 10
+@dataclass
+class Talk:
+    """
+    Represents a talk with its details.
+    """
+    date: str
+    title: str
+    talk_type: str
+    speaker: str
 
-    with open('./docs/index.rst', 'w') as indexfile:
-        separator = (
-                '='*max_talk_date_length + ' ' +
-                '='*max_talk_title_length + ' ' +
-                '='*max_talk_type_length + ' ' +
-                '='*max_talk_speaker_length + '\n'
-        )
-        indexfile.write("\n")
-        indexfile.write(separator)
-        indexfile.write(
-            'Fecha'.ljust(max_talk_date_length) + ' ' +
-            'Título'.ljust(max_talk_title_length) + ' ' +
-            'Tipo'.ljust(max_talk_type_length) + ' ' +
-            'Ponente'.ljust(max_talk_speaker_length) + '\n'
-        )
-        indexfile.write(separator)
+    @classmethod
+    def from_directory_name(cls, dir_name: str) -> 'Talk':
+        """
+        Create a Talk object from a directory name.
 
-        hyperlinks = []
-        for index, talk in enumerate(talks):
-            date, title, talk_type, speaker = talk
+        Args:
+            dir_name (str): The name of the directory to parse.
 
-            # Add hyperlink to title
-            title_with_link = "`" + title + "`_"
-            indexfile.write(
-                date.ljust(max_talk_date_length) + ' ' +
-                title_with_link.ljust(max_talk_title_length) + ' ' +
-                talk_type.ljust(max_talk_type_length) + ' ' +
-                speaker.ljust(max_talk_speaker_length) + '\n'
-            )
-            hyperlinks.append(".. _`" + title + "`: " + quote(folder_names[index]))
+        Returns:
+            Talk: A Talk object with extracted information.
 
-        indexfile.write(separator)
-        indexfile.write("\n")
+        Raises:
+            TalkParseError: If the directory name doesn't match the expected format.
+        """
+        pattern = r"(\d{4}-\d{2}-\d{2}) - (.+) \[(.+)\] - (.+)"
+        match = re.match(pattern, dir_name)
+        if match:
+            return cls(*match.groups())
+        raise TalkParseError(f"❌ Failed to parse: {dir_name}")
 
-        for hyperlink in hyperlinks:
-            indexfile.write(hyperlink + "\n")
+    def to_rst_row(self) -> str:
+        """
+        Convert the Talk object to an RST table row.
 
+        Returns:
+            str: RST formatted table row.
+        """
+        icon = TALK_TYPE_ICONS.get(self.talk_type.lower(), "❓")
+        tooltip = f':tooltip:`<span title="{self.talk_type}">{icon}</span>`'
+        return f"   * - {self.date}\n     - {tooltip}\n     - {self.title}\n     - {self.speaker}\n"
 
-def get_talks_metadata():
-    talks = []
-    talk_date_length = []
-    talk_title_length = []
-    talk_type_length = []
-    talk_speaker_length = []
+def read_description_file(repo_path: pathlib.Path) -> str:
+    """
+    Read the content of docs/description.rst file.
 
-    folder_names = get_talk_folder_names()
+    Args:
+        repo_path (pathlib.Path): Path to the repository root.
 
-    for folder_name in folder_names:
-        name_items = folder_name.split(' - ')
-        talk_date = name_items[0]
-        talk_title = name_items[1][0:name_items[1].rfind('[')].strip()
-        talk_type = name_items[1][name_items[1].rfind('[')+1:-1]
-        talk_speaker = name_items[2]
-        talks.append([talk_date, talk_title, talk_type, talk_speaker])
-        # Keep length of each field (to later get the max)
-        talk_date_length.append(len(talk_date))
-        talk_title_length.append(len(talk_title))
-        talk_type_length.append(len(talk_type))
-        talk_speaker_length.append(len(talk_speaker))
+    Returns:
+        str: Content of the description file or empty string if file not found.
+    """
+    description_path = repo_path / "docs" / "description.rst"
+    if description_path.exists():
+        return description_path.read_text(encoding="utf-8")
+    return ""
 
-    talk_fields_length = [
-        talk_date_length,
-        talk_title_length,
-        talk_type_length,
-        talk_speaker_length
-    ]
-    max_field_lengths = max_talk_metadata_field_length(talk_fields_length)
-    return talks, max_field_lengths, folder_names
+def generate_readme_content(talks: typing.List[Talk], repo_path: pathlib.Path) -> str:
+    """
+    Generate the content for the README.rst file.
 
+    Args:
+        talks (List[Talk]): List of Talk objects.
+        repo_path (pathlib.Path): Path to the repository root.
 
-def get_talk_folder_names():
-    folder_names = [str(x) for x in sorted(Path('.').iterdir(), reverse=True)
-                    if x.is_dir() and not str(x).startswith(('.', '_', 'docs'))]
-    return folder_names
-
-
-def max_talk_metadata_field_length(talk_field_lengths):
-    max_talk_date_length = max(talk_field_lengths[0])
-    max_talk_title_length = max(talk_field_lengths[1])
-    max_talk_type_length = max(talk_field_lengths[2])
-    max_talk_speaker_length = max(talk_field_lengths[3])
-    max_lengths = [
-        max_talk_date_length,
-        max_talk_title_length,
-        max_talk_type_length,
-        max_talk_speaker_length
-    ]
-    return max_lengths
-
-
-def build_readme():
-    build_index()
-    with open('README.rst', 'wb') as readme:
-        # Write header
-        readme.write(get_readme_header())
-        # Concatenate index and description
-        for file in ['description.rst', 'index.rst']:
-            with open('docs/'+file, 'rb') as fd:
-                shutil.copyfileobj(fd, readme)
-
-
-def get_readme_header():
+    Returns:
+        str: The content for the README.rst file.
+    """
     header = b""".. |travis_badge| image:: https://travis-ci.com/python-vigo/charlas.svg?branch=master
     :target: https://travis-ci.com/python-vigo/charlas
 
@@ -124,7 +92,53 @@ def get_readme_header():
 
 
 """
-    return header
 
+    description = read_description_file(repo_path)
 
-build_readme()
+    content = [
+        header.decode('utf-8'),
+        description,
+        ".. role:: tooltip(raw)",
+        "   :format: html",
+        "",
+        ".. list-table:: Example Table",
+        "   :header-rows: 1",
+        "",
+        "   * - Fecha",
+        "     - Tipo",
+        "     - Título",
+        "     - Ponente",
+        ""
+    ]
+
+    for talk in talks:
+        content.append(talk.to_rst_row())
+
+    return "\n".join(content)
+
+def main() -> None:
+    """
+    Main function to read directories and create README.rst file.
+    """
+    repo_path = pathlib.Path.cwd()
+    talks = []
+
+    # Sort directories in reverse order (newest first)
+    for dir_path in sorted(repo_path.iterdir(), reverse=True):
+        if not dir_path.is_dir() or dir_path.name.startswith(".") or dir_path.name in ["docs"]:
+            continue
+        try:
+            talk = Talk.from_directory_name(dir_path.name)
+            talks.append(talk)
+        except TalkParseError as e:
+            print(str(e))
+
+    readme_content = generate_readme_content(talks, repo_path)
+
+    readme_path = repo_path / "README.rst"
+    readme_path.write_text(readme_content, encoding="utf-8")
+
+    print(f"README.rst has been created at {readme_path}")
+
+if __name__ == "__main__":
+    main()
